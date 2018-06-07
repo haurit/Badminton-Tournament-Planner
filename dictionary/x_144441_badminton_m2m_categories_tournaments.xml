@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Badminton M2m Categories Tournaments" max_length="40" name="x_144441_badminton_m2m_categories_tournaments" type="collection">
+        <element label="Category" max_length="32" name="category" reference="x_144441_badminton_category" type="reference"/>
+        <element label="Tournament" max_length="32" name="tournament" reference="x_144441_badminton_tournament" type="reference"/>
+        <index name="index">
+            <element name="tournament"/>
+        </index>
+        <index name="index2">
+            <element name="category"/>
+        </index>
+    </element>
+</database>

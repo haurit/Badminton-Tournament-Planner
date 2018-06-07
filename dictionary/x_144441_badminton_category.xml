@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <element label="Category" max_length="40" name="x_144441_badminton_category" type="collection">
+        <element label="Double" max_length="40" name="double" type="boolean"/>
+        <element choice="1" label="Gender" max_length="40" name="gender" type="choice">
+            <choice>
+                <element label="Female" sequence="100" value="female"/>
+                <element label="Male" sequence="200" value="male"/>
+                <element label="Mixed" sequence="300" value="mixed"/>
+            </choice>
+        </element>
+        <element display="true" label="Name" max_length="254" name="name" type="string"/>
+        <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element choice="1" label="Skilllevel" max_length="40" name="skilllevel" type="choice">
+            <choice>
+                <element label="Active" sequence="100" value="active"/>
+                <element label="Hobby" sequence="100" value="hobby"/>
+            </choice>
+        </element>
+    </element>
+</database>
