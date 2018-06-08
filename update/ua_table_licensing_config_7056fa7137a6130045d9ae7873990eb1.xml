@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="ua_table_licensing_config">
+    <ua_table_licensing_config action="INSERT_OR_UPDATE">
+        <is_fulfillment>false</is_fulfillment>
+        <license_condition/>
+        <license_model>none</license_model>
+        <license_roles/>
+        <name>x_144441_badminton_m2m_categories_badminton_m2</name>
+        <op_delete>true</op_delete>
+        <op_insert>true</op_insert>
+        <op_update>true</op_update>
+        <owner_condition/>
+        <sys_class_name>ua_table_licensing_config</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-06-08 04:47:56</sys_created_on>
+        <sys_id>7056fa7137a6130045d9ae7873990eb1</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_144441_badminton_m2m_categories_badminton_m2</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>ua_table_licensing_config_7056fa7137a6130045d9ae7873990eb1</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-06-08 04:47:56</sys_updated_on>
+    </ua_table_licensing_config>
+</record_update>

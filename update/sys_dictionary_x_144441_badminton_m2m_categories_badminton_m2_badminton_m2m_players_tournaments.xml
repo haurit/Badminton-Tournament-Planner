@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update>
-    <sys_dictionary action="INSERT_OR_UPDATE" element="user" table="x_144441_badminton_player">
+    <sys_dictionary action="INSERT_OR_UPDATE" element="badminton_m2m_players_tournaments" table="x_144441_badminton_m2m_categories_badminton_m2">
         <active>true</active>
         <array>false</array>
         <array_denormalized>false</array_denormalized>
         <attributes/>
         <audit>false</audit>
-        <calculation><![CDATA[(function calculatedFieldValue(current) {
-
-	// Add your code here
-	return '';  // return the calculated value
-
-})(current);]]></calculation>
-        <choice/>
+        <calculation/>
+        <choice>0</choice>
         <choice_field/>
         <choice_table/>
-        <column_label>User</column_label>
+        <column_label>Badminton M2m Players Tournaments</column_label>
         <comments/>
         <create_roles/>
         <default_value/>
@@ -28,7 +23,7 @@
         <dynamic_creation_script/>
         <dynamic_default_value/>
         <dynamic_ref_qual/>
-        <element>user</element>
+        <element>badminton_m2m_players_tournaments</element>
         <element_reference>false</element_reference>
         <foreign_database/>
         <function_definition/>
@@ -36,12 +31,12 @@
         <internal_type display_value="Reference">reference</internal_type>
         <mandatory>false</mandatory>
         <max_length>32</max_length>
-        <name>x_144441_badminton_player</name>
+        <name>x_144441_badminton_m2m_categories_badminton_m2</name>
         <next_element/>
         <primary>false</primary>
         <read_only>false</read_only>
         <read_roles/>
-        <reference display_value="" name="sys_user">sys_user</reference>
+        <reference display_value="" name="x_144441_badminton_m2m_players_tournaments">x_144441_badminton_m2m_players_tournaments</reference>
         <reference_cascade_rule/>
         <reference_floats>false</reference_floats>
         <reference_key/>
@@ -53,16 +48,16 @@
         <staged>false</staged>
         <sys_class_name>sys_dictionary</sys_class_name>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-07 19:16:52</sys_created_on>
-        <sys_id>ace13cb53762130045d9ae7873990e92</sys_id>
-        <sys_mod_count>1</sys_mod_count>
-        <sys_name>User</sys_name>
+        <sys_created_on>2018-06-08 04:47:56</sys_created_on>
+        <sys_id>8956fa7137a6130045d9ae7873990ebf</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Badminton M2m Players Tournaments</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
-        <sys_update_name>sys_dictionary_x_144441_badminton_player_user</sys_update_name>
+        <sys_update_name>sys_dictionary_x_144441_badminton_m2m_categories_badminton_m2_badminton_m2m_players_tournaments</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-08 05:27:50</sys_updated_on>
+        <sys_updated_on>2018-06-08 04:50:51</sys_updated_on>
         <table_reference>false</table_reference>
         <text_index>false</text_index>
         <unique>false</unique>
