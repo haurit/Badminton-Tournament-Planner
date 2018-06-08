@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <record_update>
-    <sys_documentation element="" label="Badminton M2m Categories Badminton M2" language="en" table="x_144441_badminton_m2m_categories_badminton_m2">
+    <sys_documentation element="" label="Participant Category Map" language="en" table="x_144441_badminton_m2m_categories_badminton_m2">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element/>
             <help/>
             <hint/>
-            <label>Badminton M2m Categories Badminton M2</label>
+            <label>Participant Category Map</label>
             <language>en</language>
             <name>x_144441_badminton_m2m_categories_badminton_m2</name>
-            <plural>Badminton M2m Categories Badminton M2s</plural>
+            <plural>Participant Category Maps</plural>
             <sys_class_name>sys_documentation</sys_class_name>
             <sys_created_by>tom</sys_created_by>
             <sys_created_on>2018-06-08 04:47:55</sys_created_on>
             <sys_id>7456723137a6130045d9ae7873990e6b</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_name>Badminton M2m Categories Badminton M2</sys_name>
+            <sys_mod_count>1</sys_mod_count>
+            <sys_name>Participant Category Map</sys_name>
             <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
             <sys_policy/>
             <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
             <sys_update_name>sys_documentation_x_144441_badminton_m2m_categories_badminton_m2__en</sys_update_name>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-08 04:47:55</sys_updated_on>
+            <sys_updated_on>2018-06-08 11:41:11</sys_updated_on>
             <url/>
             <url_target/>
         </sys_documentation>

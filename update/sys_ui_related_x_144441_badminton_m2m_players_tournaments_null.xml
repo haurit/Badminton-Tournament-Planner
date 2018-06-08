@@ -3,7 +3,7 @@
     <sys_ui_related sys_domain="global" table="x_144441_badminton_m2m_players_tournaments" version="2" view="">
         <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
             <filter/>
-            <list_id display_value="Badminton M2m Players Tournaments - Default view" name="x_144441_badminton_m2m_players_tournaments" related_list="NULL" sys_domain="global" view="Default view">e85c4bfd37a6130045d9ae7873990ee8</list_id>
+            <list_id display_value="Participant - Default view" name="x_144441_badminton_m2m_players_tournaments" related_list="NULL" sys_domain="global" view="Default view">e85c4bfd37a6130045d9ae7873990ee8</list_id>
             <order_by/>
             <position>0</position>
             <related_list>x_144441_badminton_m2m_categories_badminton_m2.badminton_m2m_players_tournaments</related_list>
@@ -16,7 +16,7 @@
             <sys_updated_on>2018-06-08 06:24:02</sys_updated_on>
         </sys_ui_related_list_entry>
         <sys_ui_related_list action="INSERT_OR_UPDATE">
-            <calculated_name>Badminton M2m Players Tournaments - Default view</calculated_name>
+            <calculated_name>Participant - Default view</calculated_name>
             <filter/>
             <name>x_144441_badminton_m2m_players_tournaments</name>
             <order_by/>
