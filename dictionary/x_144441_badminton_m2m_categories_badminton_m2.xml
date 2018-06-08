@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <database>
     <element label="Badminton M2m Categories Badminton M2" max_length="40" name="x_144441_badminton_m2m_categories_badminton_m2" type="collection">
-        <element label="Badminton M2m Players Tournaments" max_length="32" name="badminton_m2m_players_tournaments" reference="x_144441_badminton_m2m_players_tournaments" type="reference"/>
+        <element label="Participant" max_length="32" name="badminton_m2m_players_tournaments" reference="x_144441_badminton_m2m_players_tournaments" type="reference"/>
         <element display="true" label="Category" max_length="32" name="category" reference="x_144441_badminton_category" type="reference"/>
+        <element label="Main Contact" max_length="40" name="main_contact" type="boolean"/>
         <element label="Partner" max_length="32" name="partner" reference="x_144441_badminton_m2m_players_tournaments" reference_qual="sys_idNSAMEASsys_id^EQ" reference_qual_condition="sys_idNSAMEASsys_id^EQ" type="reference"/>
         <index name="index">
             <element name="partner"/>

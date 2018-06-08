@@ -5,13 +5,13 @@
             <element>number</element>
             <position>0</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>600ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>683b0bbd37a6130045d9ae7873990e80</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -19,83 +19,97 @@
             <element>name</element>
             <position>1</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>e00ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>e83b0bbd37a6130045d9ae7873990e80</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
+            <sys_user/>
+            <type/>
+        </sys_ui_element>
+        <sys_ui_element action="INSERT_OR_UPDATE">
+            <element>short_description</element>
+            <position>2</position>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>6c3b0bbd37a6130045d9ae7873990e80</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_ui_formatter/>
+            <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>start_time</element>
-            <position>2</position>
+            <position>3</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>640ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>ec3b0bbd37a6130045d9ae7873990e80</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>end_time</element>
-            <position>3</position>
+            <position>4</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>e40ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>603b0bbd37a6130045d9ae7873990e81</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>address</element>
-            <position>4</position>
+            <position>5</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>680ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>e03b0bbd37a6130045d9ae7873990e81</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>description</element>
-            <position>5</position>
+            <position>6</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>e80ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>643b0bbd37a6130045d9ae7873990e81</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>registration_date</element>
-            <position>6</position>
+            <position>7</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 20:02:15</sys_created_on>
-            <sys_id>6c0ebc7537a2130045d9ae7873990ead</sys_id>
+            <sys_created_on>2018-06-08 06:19:06</sys_created_on>
+            <sys_id>e83b8fbd37a6130045d9ae7873990e87</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_tournament" sys_domain="global" view="Default view">28dc7c3537a2130045d9ae7873990e35</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 20:02:15</sys_updated_on>
+            <sys_updated_on>2018-06-08 06:19:06</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
