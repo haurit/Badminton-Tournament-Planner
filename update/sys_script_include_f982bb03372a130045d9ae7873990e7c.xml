@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>public</access>
+        <active>true</active>
+        <api_name>x_144441_badminton.ServerSideTools</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>ServerSideTools</name>
+        <script><![CDATA[var ServerSideTools = Class.create();
+ServerSideTools.prototype = {
+	initialize: function() {
+	},
+
+	getSysIdFromURL: function(sURL) {
+		var iSysId = sURL.indexOf('sys_id=');
+		var sResult = (iSysId != -1) ? sURL.substring(iSysId+7, iSysId+39) : '';
+		return sResult;
+	},
+
+	setPartner: function(sPartner, sPlayer, sCategory, sAction) {
+		gs.info('ServerSideTools.setPartner sPartner: ' + sPartner + ' sPlayer: ' + sPlayer + ' sCategory: ' + sCategory + ' sAction: ' + sAction);
+		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+		grParticipantCategoryMap.setWorkflow(false);
+		grParticipantCategoryMap.addQuery('category', sCategory);
+		grParticipantCategoryMap.addQuery('badminton_m2m_players_tournaments', sPlayer);
+		if (sAction == 'remove') {
+			grParticipantCategoryMap.addQuery('partner', sPartner);
+		} // if remove
+		grParticipantCategoryMap._query();
+		if (grParticipantCategoryMap._next()) {
+			if (sAction == 'remove') {
+				grParticipantCategoryMap.deleteRecord();
+				gs.info('ServerSideTools.setPartner DELETE');
+			} else if (sAction == 'add') {
+				grParticipantCategoryMap.setValue('partner', sPartner);
+				grParticipantCategoryMap.update();
+				gs.info('ServerSideTools.setPartner UPDATE');
+			} // if action
+		} else if (sAction == 'add') {
+			grParticipantCategoryMap.setValue('category', sCategory);
+			grParticipantCategoryMap.setValue('badminton_m2m_players_tournaments', sPlayer);
+			grParticipantCategoryMap.setValue('partner', sPartner);
+			grParticipantCategoryMap.setValue('main_contact', false);
+			grParticipantCategoryMap.insert();
+			gs.info('ServerSideTools.setPartner INSERT');
+		} else {
+			gs.error('ServerSideTools.setPartner Action "remove" failed because the partner could not be found.');
+		} // if participant category map found
+	},
+
+	type: 'ServerSideTools'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-06-12 06:25:27</sys_created_on>
+        <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>ServerSideTools</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-06-17 17:52:39</sys_updated_on>
+    </sys_script_include>
+</record_update>

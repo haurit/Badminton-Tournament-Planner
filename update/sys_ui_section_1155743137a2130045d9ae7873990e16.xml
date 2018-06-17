@@ -5,13 +5,13 @@
             <element>number</element>
             <position>0</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>6955743137a2130045d9ae7873990e1e</sys_id>
+            <sys_created_on>2018-06-17 13:51:39</sys_created_on>
+            <sys_id>5d19cff43732130045d9ae7873990e20</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
+            <sys_updated_on>2018-06-17 13:51:39</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
@@ -19,99 +19,57 @@
             <element>name</element>
             <position>1</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>6155743137a2130045d9ae7873990e1f</sys_id>
+            <sys_created_on>2018-06-17 13:51:39</sys_created_on>
+            <sys_id>dd19cff43732130045d9ae7873990e20</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
-            <sys_user/>
-            <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>.begin_split</element>
-            <position>2</position>
-            <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>e155743137a2130045d9ae7873990e1f</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
-            <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
-            <sys_user/>
-            <type>.begin_split</type>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>double</element>
-            <position>3</position>
-            <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>6555743137a2130045d9ae7873990e1f</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
-            <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
+            <sys_updated_on>2018-06-17 13:51:39</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>gender</element>
-            <position>4</position>
+            <position>2</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>e555743137a2130045d9ae7873990e1f</sys_id>
+            <sys_created_on>2018-06-17 13:51:39</sys_created_on>
+            <sys_id>5119cff43732130045d9ae7873990e21</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
+            <sys_updated_on>2018-06-17 13:51:39</sys_updated_on>
             <sys_user/>
             <type/>
-        </sys_ui_element>
-        <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>.split</element>
-            <position>5</position>
-            <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>6955743137a2130045d9ae7873990e1f</sys_id>
-            <sys_mod_count>0</sys_mod_count>
-            <sys_ui_formatter/>
-            <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
-            <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
-            <sys_user/>
-            <type>.split</type>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
             <element>skilllevel</element>
-            <position>6</position>
+            <position>3</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>e955743137a2130045d9ae7873990e1f</sys_id>
+            <sys_created_on>2018-06-17 13:51:39</sys_created_on>
+            <sys_id>d119cff43732130045d9ae7873990e21</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
+            <sys_updated_on>2018-06-17 13:51:39</sys_updated_on>
             <sys_user/>
             <type/>
         </sys_ui_element>
         <sys_ui_element action="INSERT_OR_UPDATE">
-            <element>.end_split</element>
-            <position>7</position>
+            <element>type</element>
+            <position>4</position>
             <sys_created_by>tom</sys_created_by>
-            <sys_created_on>2018-06-07 19:24:21</sys_created_on>
-            <sys_id>6d55743137a2130045d9ae7873990e1f</sys_id>
+            <sys_created_on>2018-06-17 13:51:39</sys_created_on>
+            <sys_id>5519cff43732130045d9ae7873990e21</sys_id>
             <sys_mod_count>0</sys_mod_count>
             <sys_ui_formatter/>
             <sys_ui_section caption="NULL" display_value="" name="x_144441_badminton_category" sys_domain="global" view="Default view">1155743137a2130045d9ae7873990e16</sys_ui_section>
             <sys_updated_by>tom</sys_updated_by>
-            <sys_updated_on>2018-06-07 19:24:21</sys_updated_on>
+            <sys_updated_on>2018-06-17 13:51:39</sys_updated_on>
             <sys_user/>
-            <type>.end_split</type>
+            <type/>
         </sys_ui_element>
         <sys_ui_section action="INSERT_OR_UPDATE">
             <caption/>

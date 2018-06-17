@@ -9,57 +9,74 @@
         <name>RefQualifier</name>
         <script><![CDATA[var RefQualifier = Class.create();
 RefQualifier.prototype = {
-    initialize: function() {
-    },
-	
-	TournamentCategory: function(sId) {
-		if (current) {
-		gs.info('RefQualifier.TournamentCategory: ' + current.getDisplayName() + ' class: ' + current.getClassDisplayValue());	
-		} else {
-			gs.info('RefQualifier.TournamentCategory no current: ' + sId);
-		}
-		
-		/*
-		var gp = ' ';
-		var a = current;
- 
-		//return everything if the assigned_to value is empty
-		if(!a)
-			return;
-		//sys_user_grmember has the user to group relationship
-		var grp = new GlideRecord('sys_user_grmember');
-		
-		
-		grp.addQuery('user',a);
-		grp.query();
-		while(grp.next()) {
-			if (gp.length > 0) {
-				//build a comma separated string of groups if there is more than one
-				gp += (',' + grp.group);
-			}
-			else {
-				gp = grp.group;
-			}
-		}
-		// return Groups where assigned to is in those groups we use IN for lists
-		return 'sys_idIN' + gp;
-		*/
+	initialize: function() {
 	},
 
+	getPartnerQuery: function() {
+		var aQuery = [];
+		//gs.info('getPartnerQuery id: ' + current.sys_id + ' participant gender: ' + current.badminton_m2m_players_tournaments.player.user.gender + ' category gender: ' + current.category.gender + ' category type: ' + current.category.type + ' player id: ' + current.badminton_m2m_players_tournaments.sys_id);
+		if (current.category.type == 'double') {
+			if (current.category.gender != 'mixed') {
+				aQuery.push('player.user.gender=' + current.category.gender);
+			} else {
+				aQuery.push('player.user.gender!=' + current.badminton_m2m_players_tournaments.player.user.gender);
+			} // if gender
+			var aParticipant = [];
+			aParticipant.push(current.badminton_m2m_players_tournaments.sys_id); // cannot select self
+			var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+			grParticipantCategoryMap.addQuery('badminton_m2m_players_tournaments.tournament', current.badminton_m2m_players_tournaments.tournament);
+			grParticipantCategoryMap.addQuery('category', current.category);
+			grParticipantCategoryMap.addNotNullQuery('partner');
+			grParticipantCategoryMap._query();
+			while (grParticipantCategoryMap._next()) {
+				aParticipant.push(grParticipantCategoryMap.getValue('partner'));
+			} // each participant which has already a partner
+			aQuery.push('sys_idNOT IN' + aParticipant.join(','));
+		} else {
+			gs.addErrorMessage(gs.getMessage('category_single_no_partner_selection'));
+			aQuery.push('player.user.gender=na');
+		} // if not double quite
+		//gs.info('RefQualifier.getPartnerQuery sQuery: ' + aQuery.join('^'));
+		return aQuery.join('^');
+	},
 
-    type: 'RefQualifier'
+	getTournamentCategoryQuery: function(sUrl) {
+		var sQuery;
+		var _ServerSideTools = new ServerSideTools();
+		var sParticipant = _ServerSideTools.getSysIdFromURL(sUrl);
+		var grParticipant = new GlideRecord("x_144441_badminton_m2m_players_tournaments");
+		if (grParticipant.get(sParticipant)) {
+			var sGender = String(grParticipant.player.user.gender).toLowerCase();
+			var aCat = [];
+			var grTournamentCatMap = new GlideRecord("x_144441_badminton_m2m_categories_tournaments");
+			grTournamentCatMap.addQuery('tournament', grParticipant.getValue('tournament'));
+			if ((sGender) && (sGender != 'Not Specified')) {
+				grTournamentCatMap.addQuery('category.gender', 'IN', 'mixed,' + sGender);
+			} // if gender
+			grTournamentCatMap._query();
+			while (grTournamentCatMap._next()) {
+				aCat.push(grTournamentCatMap.getValue('category'));
+			} // each mapped category
+			sQuery = 'sys_idIN' + aCat.join(',');
+		} else {
+			gs.info('RefQualifier.getTournamentCategoryQuery no participant: ' + sParticipant);
+		} // if tournament
+		return sQuery;
+	},
+
+	type: 'RefQualifier'
 };]]></script>
         <sys_class_name>sys_script_include</sys_class_name>
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-08 12:00:36</sys_created_on>
         <sys_id>8c5894c6376a130045d9ae7873990ee4</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>52</sys_mod_count>
         <sys_name>RefQualifier</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_8c5894c6376a130045d9ae7873990ee4</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-08 12:12:41</sys_updated_on>
+        <sys_updated_on>2018-06-17 15:08:19</sys_updated_on>
     </sys_script_include>
 </record_update>

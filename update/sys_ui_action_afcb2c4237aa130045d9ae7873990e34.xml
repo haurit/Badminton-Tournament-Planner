@@ -23,10 +23,16 @@
         <name>Select Categories</name>
         <onclick/>
         <order>100</order>
-        <script><![CDATA[var uri = action.getGlideURI();
+        <script><![CDATA[var _RefQualifier = new RefQualifier();
+var sQuery = _RefQualifier.getTournamentCategoryQuery(RP.getReferringURL());
+var uri = action.getGlideURI();
 var path = uri.getFileFromPath();
 uri.set('sysparm_m2m_ref', current.getTableName());
 uri.set('sysparm_stack', 'no');
+uri.set('jvar_no_filter', 'true');
+if (sQuery) {
+	uri.set('sysparm_query', sQuery);
+} // if query
 action.setRedirectURL(uri.toString('sys_m2m_template.do'));]]></script>
         <show_insert>true</show_insert>
         <show_multiple_update>false</show_multiple_update>
@@ -38,7 +44,7 @@ action.setRedirectURL(uri.toString('sys_m2m_template.do'));]]></script>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>afcb2c4237aa130045d9ae7873990e34</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>14</sys_mod_count>
         <sys_name>Select Categories</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
@@ -46,7 +52,7 @@ action.setRedirectURL(uri.toString('sys_m2m_template.do'));]]></script>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_ui_action_afcb2c4237aa130045d9ae7873990e34</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-08 13:24:00</sys_updated_on>
+        <sys_updated_on>2018-06-14 07:08:31</sys_updated_on>
         <table>x_144441_badminton_m2m_categories_badminton_m2</table>
         <ui11_compatible>true</ui11_compatible>
         <ui16_compatible>false</ui16_compatible>
