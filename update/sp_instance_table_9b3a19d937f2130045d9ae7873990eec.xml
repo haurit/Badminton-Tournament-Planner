@@ -4,10 +4,9 @@
         <class_name/>
         <color>default</color>
         <css/>
-        <display_field/>
-        <field_list>user,year</field_list>
-        <filter table="x_144441_badminton_player">userDYNAMIC90d1921e5f510100a9ad2572f2b477fe<item endquery="false" field="user" goto="false" newquery="false" operator="DYNAMIC" or="false" value="90d1921e5f510100a9ad2572f2b477fe"/>
-        </filter>
+        <display_field>sys_created_on</display_field>
+        <field_list>name,tournament,player</field_list>
+        <filter/>
         <glyph>user</glyph>
         <id/>
         <maximum_entries>5</maximum_entries>
@@ -24,15 +23,15 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-18 19:04:20</sys_created_on>
         <sys_id>9b3a19d937f2130045d9ae7873990eec</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name>Current User</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_instance_table_9b3a19d937f2130045d9ae7873990eec</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-18 19:07:33</sys_updated_on>
-        <table>x_144441_badminton_player</table>
+        <sys_updated_on>2018-08-24 16:28:56</sys_updated_on>
+        <table>x_144441_badminton_m2m_players_tournaments</table>
         <title>Current User</title>
         <url/>
         <widget_parameters/>
