@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><unload unload_date="2018-08-24 16:22:52">
+<sys_remote_update_set action="INSERT_OR_UPDATE">
+<application display_value="Global">global</application>
+<application_name>Global</application_name>
+<application_scope>global</application_scope>
+<application_version/>
+<collisions/>
+<commit_date/>
+<deleted/>
+<description/>
+<inserted/>
+<name>Badminton Tournament Planner Global Setup</name>
+<origin_sys_id/>
+<parent display_value=""/>
+<release_date/>
+<remote_base_update_set display_value=""/>
+<remote_parent_id/>
+<remote_sys_id>08323dfe3704230045d9ae7873990e5a</remote_sys_id>
+<state>loaded</state>
+<summary/>
+<sys_class_name>sys_remote_update_set</sys_class_name>
+<sys_created_by>tom</sys_created_by>
+<sys_created_on>2018-08-24 16:22:51</sys_created_on>
+<sys_id>17c731763744230045d9ae7873990ef9</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_updated_by>tom</sys_updated_by>
+<sys_updated_on>2018-08-24 16:22:51</sys_updated_on>
+<update_set display_value=""/>
+<update_source display_value=""/>
+<updated/>
+</sys_remote_update_set>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_ed42f5fa3704230045d9ae7873990e73</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description/><ignore_cache>false</ignore_cache><is_private>false</is_private><name>glide.entry.loggedin.page_ess</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>tom</sys_created_by><sys_created_on>2018-08-24 15:58:54</sys_created_on><sys_id>ed42f5fa3704230045d9ae7873990e73</sys_id><sys_mod_count>0</sys_mod_count><sys_name>glide.entry.loggedin.page_ess</sys_name><sys_package display_value="Global" source="global">global</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_properties_ed42f5fa3704230045d9ae7873990e73</sys_update_name><sys_updated_by>tom</sys_updated_by><sys_updated_on>2018-08-24 15:58:54</sys_updated_on><type>string</type><value>bck</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=ed42f5fa3704230045d9ae7873990e73"/></record_update>]]></payload>
+<payload_hash>1378561504</payload_hash>
+<remote_update_set display_value="Badminton Tournament Planner Global Setup">17c731763744230045d9ae7873990ef9</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>tom</sys_created_by>
+<sys_created_on>2018-08-24 16:22:51</sys_created_on>
+<sys_id>57c731763744230045d9ae7873990efa</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1656ca8f1520000001</sys_recorded_at>
+<sys_updated_by>tom</sys_updated_by>
+<sys_updated_on>2018-08-24 16:22:51</sys_updated_on>
+<table/>
+<target_name>glide.entry.loggedin.page_ess</target_name>
+<type>System Property</type>
+<u_open_record>dd2983c1bf3021000ba9dc2ecf0739f3</u_open_record>
+<update_domain>global</update_domain>
+<update_guid>e0527dfec00423008c8003ee877fe24b</update_guid>
+<update_guid_history>e0527dfec00423008c8003ee877fe24b:1378561504</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+<sys_update_xml action="INSERT_OR_UPDATE">
+<action>INSERT_OR_UPDATE</action>
+<application display_value="Global">global</application>
+<category>customer</category>
+<comments/>
+<name>sys_properties_4695f3760a0a0b1700f2adac4c2503e8</name>
+<payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_properties"><sys_properties action="INSERT_OR_UPDATE"><choices/><description>Script executed on server to determine where to send users when they first access the system. The script will return the redirect URL in String format.&#13;
+new CMSEntryPage().getEntryPage()</description><ignore_cache>false</ignore_cache><is_private>false</is_private><name>glide.entry.page.script</name><read_roles/><suffix/><sys_class_name>sys_properties</sys_class_name><sys_created_by>glide.maint</sys_created_by><sys_created_on>2009-05-15 23:23:12</sys_created_on><sys_id>4695f3760a0a0b1700f2adac4c2503e8</sys_id><sys_mod_count>2</sys_mod_count><sys_name>glide.entry.page.script</sys_name><sys_package display_value="Content Management" source="com.glide.cms">b0bffdeab96013006517ce7df7ee466d</sys_package><sys_policy/><sys_scope display_value="Global">global</sys_scope><sys_update_name>sys_properties_4695f3760a0a0b1700f2adac4c2503e8</sys_update_name><sys_updated_by>tom</sys_updated_by><sys_updated_on>2018-08-24 16:18:26</sys_updated_on><type>string</type><value>getPage();&#13;
+function getPage() {return '/bck';}</value><write_roles/></sys_properties><sys_translated_text action="delete_multiple" query="documentkey=4695f3760a0a0b1700f2adac4c2503e8"/></record_update>]]></payload>
+<payload_hash>-1296857587</payload_hash>
+<remote_update_set display_value="Badminton Tournament Planner Global Setup">17c731763744230045d9ae7873990ef9</remote_update_set>
+<replace_on_upgrade>false</replace_on_upgrade>
+<sys_created_by>tom</sys_created_by>
+<sys_created_on>2018-08-24 16:22:51</sys_created_on>
+<sys_id>9bc731763744230045d9ae7873990ef9</sys_id>
+<sys_mod_count>0</sys_mod_count>
+<sys_recorded_at>1656cbad5220000001</sys_recorded_at>
+<sys_updated_by>tom</sys_updated_by>
+<sys_updated_on>2018-08-24 16:22:51</sys_updated_on>
+<table/>
+<target_name>glide.entry.page.script</target_name>
+<type>System Property</type>
+<u_open_record>dd2983c1bf3021000ba9dc2ecf0739f3</u_open_record>
+<update_domain>global</update_domain>
+<update_guid>7ec6f9362a442300a5987a6ba555cd67</update_guid>
+<update_guid_history>7ec6f9362a442300a5987a6ba555cd67:-1296857587,7d96b13636442300d4dad72a4c3dc60f:-423460206,5596b13686442300f8722757c8f1520c:421310730</update_guid_history>
+<update_set display_value=""/>
+<view/>
+</sys_update_xml>
+</unload>
