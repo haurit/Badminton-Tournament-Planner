@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sys_app">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app">
     <sys_app action="INSERT_OR_UPDATE">
         <active>true</active>
         <enforce_license>log</enforce_license>
         <js_level>helsinki_es5</js_level>
         <licensable>true</licensable>
+        <license_category>none</license_category>
         <license_model>none</license_model>
         <logo/>
         <menu display_value="Badminton Tournament Planner">a93be0b53762130045d9ae7873990ef0</menu>
@@ -43,6 +43,7 @@
         <image_width>91</image_width>
         <size_bytes>10354</size_bytes>
         <size_compressed>3651</size_compressed>
+        <state/>
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-07 18:40:17</sys_created_on>
         <sys_id>b73be8393762130045d9ae7873990ec6</sys_id>

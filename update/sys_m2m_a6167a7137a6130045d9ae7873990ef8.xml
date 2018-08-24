@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update table="sys_m2m">
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_m2m">
     <sys_m2m action="INSERT_OR_UPDATE">
         <from_table>x_144441_badminton_m2m_players_tournaments</from_table>
         <m2m_from_field>badminton_m2m_players_tournaments</m2m_from_field>

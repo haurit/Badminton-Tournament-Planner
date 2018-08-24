@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<record_update>
+<?xml version="1.0" encoding="UTF-8"?><record_update>
     <sys_documentation element="main_contact" label="Main Contact" language="en" table="x_144441_badminton_m2m_categories_badminton_m2">
         <sys_documentation action="INSERT_OR_UPDATE">
             <element>main_contact</element>
