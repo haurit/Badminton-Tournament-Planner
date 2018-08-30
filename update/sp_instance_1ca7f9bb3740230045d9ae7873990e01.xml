@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance">
+    <sp_instance action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph/>
+        <id/>
+        <order>1</order>
+        <roles/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="1">c3898f4b3780230045d9ae7873990ec2</sp_column>
+        <sp_widget display_value="btp_login_header">d11cb2a33744230045d9ae7873990ed1</sp_widget>
+        <sys_class_name>sp_instance</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-08-27 18:56:02</sys_created_on>
+        <sys_id>1ca7f9bb3740230045d9ae7873990e01</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name/>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_instance_1ca7f9bb3740230045d9ae7873990e01</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-08-27 18:56:02</sys_updated_on>
+        <title/>
+        <url/>
+        <widget_parameters/>
+    </sp_instance>
+    <sys_translated_text action="delete_multiple" query="documentkey=1ca7f9bb3740230045d9ae7873990e01"/>
+</record_update>

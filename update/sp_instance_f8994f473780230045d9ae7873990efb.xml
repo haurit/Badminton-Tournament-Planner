@@ -6,27 +6,27 @@
         <css/>
         <glyph/>
         <id/>
-        <order>1</order>
+        <order>2</order>
         <roles/>
         <short_description/>
         <size>md</size>
-        <sp_column display_value="2">d3c919d937f2130045d9ae7873990ee8</sp_column>
-        <sp_widget display_value="SimpleLoginUI">9f3719eab32003007a6de81816a8dcd1</sp_widget>
+        <sp_column display_value="1">c3898f4b3780230045d9ae7873990ec2</sp_column>
+        <sp_widget display_value="btp_account">763faa0b3740230045d9ae7873990e9d</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-18 19:04:04</sys_created_on>
-        <sys_id>232a19193776130045d9ae7873990ebf</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_created_on>2018-08-25 16:58:37</sys_created_on>
+        <sys_id>f8994f473780230045d9ae7873990efb</sys_id>
+        <sys_mod_count>2</sys_mod_count>
         <sys_name/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
-        <sys_update_name>sp_instance_232a19193776130045d9ae7873990ebf</sys_update_name>
+        <sys_update_name>sp_instance_f8994f473780230045d9ae7873990efb</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-18 19:04:04</sys_updated_on>
+        <sys_updated_on>2018-08-27 19:11:55</sys_updated_on>
         <title/>
         <url/>
-        <widget_parameters/>
+        <widget_parameters><![CDATA[{"action": "create"}]]></widget_parameters>
     </sp_instance>
-    <sys_translated_text action="delete_multiple" query="documentkey=232a19193776130045d9ae7873990ebf"/>
+    <sys_translated_text action="delete_multiple" query="documentkey=f8994f473780230045d9ae7873990efb"/>
 </record_update>

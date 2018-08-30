@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, $window, spUtil, $log, spAriaUtil) {
+	var c = this;
+	c.message = '';
+	c.genderchoicelistoption = {
+		hideSearch: true,
+		placeholder: "Gender"
+	};
+	c.genderchoice = [{display:"Male",value: "Male"}, 
+										{display:"Female",value: "Female"}];
+	c.triggerSubmit = function() {
+		c.submitInProgress = true;
+		var aMandatory = ['userfirst', 'userlast', 'useremail', 'usergender', 'useryear'];
+		for(var i = 0; i < aMandatory.length; i++){
+			if (!c.data[aMandatory[i]]) {
+				c.data.message = 'Please fill out all the fields!';
+				c.submitInProgress = false;
+			} // if field
+		} // each field
+		var reEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+		if (!reEmail.test( c.data.useremail.toLowerCase())) {
+			c.data.message = 'Please fill out a valid email!';
+			c.submitInProgress = false;
+		} // if email
+		var iMinYear=new Date().getFullYear() - 5;
+		var iMaxYear=new Date().getFullYear() - 85;
+		var iYear = parseInt(c.data.useryear);
+		if ((isNaN(c.data.useryear)) || (iYear > iMinYear) || (iYear < iMaxYear)) {
+			c.data.message = 'Please fill out a valid year!';
+			c.submitInProgress = false;
+		} // if year
+		if (c.submitInProgress) {
+			c.server.update().then(function(response) {
+				if (response.success == 'Success') {
+					$window.location.href = '?id=btp_overview';
+				} else {
+					c.submitInProgress = false;
+					c.data.message = response.message;
+				} // if message
+			});
+		}
+	}
+}
+]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>btp_account</id>
+        <internal>false</internal>
+        <link/>
+        <name>btp_account</name>
+        <option_schema>[{"name":"action","section":"Behavior","label":"Action","type":"string"}]</option_schema>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	if (!input) {
+		gs.info('Initiating Account action: ' + options.action);
+		data.bLoggedIn = gs.getSession().isLoggedIn();
+		data.userfirst = '';
+		data.userlast = '';
+		data.useremail = '';
+		data.usergender = '';
+		data.useryear = '';
+		data.title = 'Account';
+		data.success = '';
+		data.message = '';
+		if (options.action == 'create') {
+			data.title = 'Create Account';
+		} else if (data.bLoggedIn == false) {
+			data.redirect("\bck?id=btp_login");
+		} else {
+			data.title = 'Edit Account';
+			var grParticipant = new GlideRecord('x_144441_badminton_player');
+			grParticipant.addQuery('user', gs.getUserID());
+			grParticipant.query();
+			if (grParticipant.next()) {
+				data.userfirst = grParticipant.user.first_name.getDisplayValue();
+				data.userlast = grParticipant.user.last_name.getDisplayValue();
+				data.useremail = grParticipant.user.email.getDisplayValue();
+				data.usergender = grParticipant.user.gender.getDisplayValue();
+				data.useryear = grParticipant.getValue('year');
+			} else {
+				data.redirect("\bck?id=btp_overview");
+			} // if user
+		} // if action
+
+	} else {
+		var bInsert = true;
+		var grUser = new GlideRecord('sys_user');
+		var grParticipant = new GlideRecord('x_144441_badminton_player');
+		grUser.addQuery('user_name', input.useremail);
+		grUser.query();
+		if (grUser.next()) {
+			if (options.action == 'create') {
+				data.message = 'User already exists, cannot insert!';
+				return;
+			} // if create
+			grParticipant.addQuery('user', grUser.getUniqueValue());
+			grParticipant.query();
+			grParticipant.next();
+			bInsert = false;
+		} // if new user
+		grUser.setValue('user_name', input.useremail);
+		grUser.setValue('first_name', input.userfirst);
+		grUser.setValue('last_name', input.userlast);
+		grUser.setValue('email', input.useremail);
+		grUser.setValue('gender', input.usergender);
+		grParticipant.setValue('name', input.userfirst + ' ' + input.userlast + ' (' + input.useryear + ')');
+		grParticipant.setValue('year', input.useryear);
+		if (bInsert) {
+			grUser.insert();
+			grParticipant.setValue('user', grUser.getUniqueValue());
+			grParticipant.insert();
+		} else {
+			grUser.update();
+			grParticipant.update();
+		} // if insert
+		data.success = 'Success';
+	} // if input
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-08-25 15:03:31</sys_created_on>
+        <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
+        <sys_mod_count>105</sys_mod_count>
+        <sys_name>btp_account</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-08-30 08:50:22</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+  <div class="panel-heading ng-scope">
+    <h3 class="panel-title">{{::data.title}}</h3>
+  </div>
+  <div ng-if="c.data.message" class="wrapper-md clearfix b-t">
+    <div ng-if="c.data.message" class="alert alert-danger ng-binding ng-scope" role="alert" style="">
+      {{c.data.message}}
+    </div>
+    <div ng-if="c.data.success" class="alert alert-success ng-binding ng-scope" role="alert" style="">
+      {{c.data.success}}
+    </div>
+  </div>
+  <div class="wrapper-md clearfix b-t">
+    <div class="list-group list-group-sm"> 
+      <div class="list-group-item"> 
+        <label for="userfirst">${Firstname}</label>
+        <input id="userfirst" name="userfirst" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Firstname}' autofocus="true" ng-model="c.data.userfirst"/>
+      </div>
+      <div class="list-group-item"> 
+        <label for="userlast">${Lastname}</label>
+        <input id="userlast" name="userlast" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Lastname}' ng-model="c.data.userlast"/>
+      </div>
+      <div class="list-group-item"> 
+        <label for="useremail">${Email}</label>
+        <input id="useremail" type="email" name="useremail" ng-click="message = ''" class="ng-valid-email form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Email}' ng-model="c.data.useremail"/>
+      </div>
+      <div class="list-group-item"> 
+        <label for="usergender">${Gender}</label>
+        <sn-choice-list sn-model="c.data.usergender" sn-options="c.genderchoicelistoption" sn-value-field="value" sn-text-field="display" sn-items="c.genderchoice"></sn-choice-list>
+      </div>
+      <div class="list-group-item"> 
+        <label for="useryear">${Year}</label>
+        <input id="useryear" name="useryear" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Year}' ng-model="c.data.useryear"/>
+      </div>
+    </div>
+    <button ng-disabled="c.submitInProgress" name="submit" ng-click="c.triggerSubmit()" class="btn btn-lg btn-primary btn-block">
+      <span ng-show="!c.submitInProgress">${Submit}</span>
+      <span ng-show="c.submitInProgress">${Saving...}</span>
+    </button>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>
