@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, $http, $window, spUtil, $log, spAriaUtil) {
+        <client_script><![CDATA[function($scope, $http, $window, spUtil, $log, $timeout, spAriaUtil) {
 	var c = this;
 	c.message = '';
 	c.genderchoicelistoption = {
@@ -9,7 +9,7 @@
 		placeholder: "Gender"
 	};
 	c.genderchoice = [{display:"Male",value: "Male"}, 
-										{display:"Female",value: "Female"}];
+					  {display:"Female",value: "Female"}];
 	c.triggerSubmit = function() {
 		c.submitInProgress = true;
 		var aMandatory = ['userfirst', 'userlast', 'useremail', 'usergender', 'useryear'];
@@ -32,16 +32,24 @@
 			c.submitInProgress = false;
 		} // if year
 		if (c.submitInProgress) {
+			c.data.action = 'submit';
 			c.server.update().then(function(response) {
-				if (response.success == 'Success') {
-					$window.location.href = '?id=btp_overview';
+				if (response.success) {
+					c.data.success = response.success;
+					$timeout(function() {
+						$window.location.href = '?id=btp_overview';
+					}, 400);
 				} else {
 					c.submitInProgress = false;
 					c.data.message = response.message;
+					$timeout(function() {
+						c.data.message = '';
+					}, 10000);
+
 				} // if message
 			});
 		}
-	}
+	};
 }
 ]]></client_script>
         <controller_as>c</controller_as>
@@ -60,69 +68,18 @@
         <public>true</public>
         <roles/>
         <script><![CDATA[(function() {
+	var _ServerSideTools = new ServerSideTools();
+	var oData = {};
 	if (!input) {
-		gs.info('Initiating Account action: ' + options.action);
-		data.bLoggedIn = gs.getSession().isLoggedIn();
-		data.userfirst = '';
-		data.userlast = '';
-		data.useremail = '';
-		data.usergender = '';
-		data.useryear = '';
-		data.title = 'Account';
-		data.success = '';
-		data.message = '';
-		if (options.action == 'create') {
-			data.title = 'Create Account';
-		} else if (data.bLoggedIn == false) {
-			data.redirect("\bck?id=btp_login");
-		} else {
-			data.title = 'Edit Account';
-			var grParticipant = new GlideRecord('x_144441_badminton_player');
-			grParticipant.addQuery('user', gs.getUserID());
-			grParticipant.query();
-			if (grParticipant.next()) {
-				data.userfirst = grParticipant.user.first_name.getDisplayValue();
-				data.userlast = grParticipant.user.last_name.getDisplayValue();
-				data.useremail = grParticipant.user.email.getDisplayValue();
-				data.usergender = grParticipant.user.gender.getDisplayValue();
-				data.useryear = grParticipant.getValue('year');
-			} else {
-				data.redirect("\bck?id=btp_overview");
-			} // if user
-		} // if action
-
+		oData = _ServerSideTools.getAccountData(gs.getSession().isLoggedIn(), gs.getUserID(), options.action);
+		Object.keys(oData).forEach(function(sKey) {
+			data[sKey] = oData[sKey];
+		}); // each key in data
 	} else {
-		var bInsert = true;
-		var grUser = new GlideRecord('sys_user');
-		var grParticipant = new GlideRecord('x_144441_badminton_player');
-		grUser.addQuery('user_name', input.useremail);
-		grUser.query();
-		if (grUser.next()) {
-			if (options.action == 'create') {
-				data.message = 'User already exists, cannot insert!';
-				return;
-			} // if create
-			grParticipant.addQuery('user', grUser.getUniqueValue());
-			grParticipant.query();
-			grParticipant.next();
-			bInsert = false;
-		} // if new user
-		grUser.setValue('user_name', input.useremail);
-		grUser.setValue('first_name', input.userfirst);
-		grUser.setValue('last_name', input.userlast);
-		grUser.setValue('email', input.useremail);
-		grUser.setValue('gender', input.usergender);
-		grParticipant.setValue('name', input.userfirst + ' ' + input.userlast + ' (' + input.useryear + ')');
-		grParticipant.setValue('year', input.useryear);
-		if (bInsert) {
-			grUser.insert();
-			grParticipant.setValue('user', grUser.getUniqueValue());
-			grParticipant.insert();
-		} else {
-			grUser.update();
-			grParticipant.update();
-		} // if insert
-		data.success = 'Success';
+		oData = _ServerSideTools.setAccountData(input, options.action);
+		Object.keys(oData).forEach(function(sKey) {
+			data[sKey] = oData[sKey];
+		}); // each key in data
 	} // if input
 })();]]></script>
         <servicenow>false</servicenow>
@@ -130,14 +87,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>105</sys_mod_count>
+        <sys_mod_count>111</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-08-30 08:50:22</sys_updated_on>
+        <sys_updated_on>2018-08-31 21:03:48</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>

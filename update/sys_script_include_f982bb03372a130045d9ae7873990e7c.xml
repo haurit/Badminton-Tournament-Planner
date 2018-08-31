@@ -48,7 +48,7 @@ ServerSideTools.prototype = {
 		} // if participant category map found
 	},
 
-	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sTournament) {
+	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sCatType, sTournament) {
 		var aQuery = [];
 		if (sCatGender != 'mixed') {
 			aQuery.push('user.gender=' + sCatGender);
@@ -59,16 +59,249 @@ ServerSideTools.prototype = {
 		aParticipant.push(sUser); // cannot select self
 		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
 		grParticipantCategoryMap.addQuery('badminton_m2m_players_tournaments.tournament', sTournament);
-		grParticipantCategoryMap.addQuery('category', sCat);
+		grParticipantCategoryMap.addQuery('category.type', sCatType);
 		grParticipantCategoryMap.addNotNullQuery('partner');
-		grParticipantCategoryMap._query();
-		while (grParticipantCategoryMap._next()) {
-			aParticipant.push(grParticipantCategoryMap.getValue('partner'));
+		grParticipantCategoryMap.query();
+		while (grParticipantCategoryMap.next()) {
+			aParticipant.push(String(grParticipantCategoryMap.partner.player));
 		} // each participant which has already a partner
 		aQuery.push('sys_idNOT IN' + aParticipant.join(','));
-gs.info('getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
+		//gs.info('getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
 		return aQuery.join('^');
 	},
+
+	getHeaderData: function(bLoggedIn, sUser, sPage) {
+		gs.info('getRegistrationData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage);
+		var oRet = {success: '', info: '', message: '', title: '', bLoggedIn: false, user: sUser, userName: gs.getUserDisplayName(), html: ''};
+		var grTournament = new GlideRecord('x_144441_badminton_tournament');
+		grTournament.addActiveQuery();
+		grTournament.query();
+		if (grTournament.next()) {
+			oRet.title = grTournament.getValue('short_description');
+			oRet.html = grTournament.getValue('description');
+			oRet.info = grTournament.address.getLabel() + '\n' + grTournament.getDisplayValue('address') + '\n';
+			oRet.info += grTournament.start_time.getLabel() + ': ' + grTournament.getDisplayValue('start_time') + '\n';
+			oRet.info += grTournament.end_time.getLabel() + ': ' + grTournament.getDisplayValue('end_time') + '\n';
+		} else {
+			oRet.message = 'Currently there is no active tournament!';
+		} // if tournament
+		return oRet;
+	},
+
+	getAccountData: function(bLoggedIn, sUser, sAction) {
+		var oRet = {success: '', info: '', message: '', title: 'Account', bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: ''};
+		if (sAction == 'create') {
+			oRet.title = 'Create Account';
+		} else if (data.bLoggedIn == false) {
+			oRet.redirect("\bck?id=btp_login");
+		} else {
+			oRet.title = 'Edit Account';
+			var grParticipant = new GlideRecord('x_144441_badminton_player');
+			grParticipant.addQuery('user', sUser);
+			grParticipant.query();
+			if (grParticipant.next()) {
+				oRet.userfirst = grParticipant.user.first_name.getDisplayValue();
+				oRet.userlast = grParticipant.user.last_name.getDisplayValue();
+				oRet.useremail = grParticipant.user.email.getDisplayValue();
+				oRet.usergender = grParticipant.user.gender.getDisplayValue();
+				oRet.useryear = grParticipant.getValue('year');
+			} else {
+				oRet.redirect("\bck?id=btp_overview");
+			} // if user
+		} // if action
+		return oRet;
+	},
+
+	setAccountData: function(oInput, sAction) {
+		//gs.info('setAccountData sUser: ' + JSON.stringify(oInput));
+		var oRet = {message: '', success: ''};
+		if (oInput.action == 'submit') {
+			var bInsert = true;
+			var grUser = new GlideRecord('sys_user');
+			var grParticipant = new GlideRecord('x_144441_badminton_player');
+			grUser.addQuery('user_name', oInput.useremail);
+			grUser.query();
+			if (grUser.next()) {
+				if (sAction == 'create') {
+					oRet.message = 'User already exists, cannot insert!';
+					return oRet;
+				} // if create
+				grParticipant.addQuery('user', grUser.getUniqueValue());
+				grParticipant.query();
+				grParticipant.next();
+				bInsert = false;
+			} // if new user
+			grUser.setValue('user_name', oInput.useremail);
+			grUser.setValue('first_name', oInput.userfirst);
+			grUser.setValue('last_name', oInput.userlast);
+			grUser.setValue('email', oInput.useremail);
+			grUser.setValue('gender', oInput.usergender);
+			grParticipant.setValue('name', oInput.userfirst + ' ' + oInput.userlast + ' (' + oInput.useryear + ')');
+			grParticipant.setValue('year', oInput.useryear);
+			if (bInsert) {
+				grUser.insert();
+				grParticipant.setValue('user', grUser.getUniqueValue());
+				grParticipant.insert();
+			} else {
+				grUser.update();
+				grParticipant.update();
+			} // if insert
+		} // if action
+		if (!oRet.message) {
+			oRet.success = 'Successfully Saved!';
+		} // if no message
+		//gs.info('setAccountData oRet: ' + JSON.stringify(oRet));
+		return oRet;
+	}, // function set registration
+
+
+	getRegistrationData: function(sUser) {
+		//gs.info('getRegistrationData sUser: ' + sUser);
+		var oRet = {success: '', info: '', message: '', title: '', user: '', gender: '', player: '', skilllevel: '', skilllevel_readonly: false, tournament: '', categories: []};
+		oRet.user = sUser;
+		var grUser = new GlideRecord('sys_user');
+		grUser.get(oRet.user);
+		oRet.gender = grUser.getValue('gender');
+		var grPlayer = new GlideRecord('x_144441_badminton_player');
+		grPlayer.addQuery('user', oRet.user);
+		grPlayer.query();
+		grPlayer.next();
+		oRet.player = grPlayer.getUniqueValue();
+		var grTournament = new GlideRecord('x_144441_badminton_tournament');
+		grTournament.addActiveQuery();
+		grTournament.query();
+		if (!grTournament.next()) {
+			oRet.message = 'Currently there is no active tournament!';
+			return;
+		} // if tournament
+		oRet.tournament = grTournament.getUniqueValue();
+		oRet.title = 'Registration for ' + grTournament.getValue('short_description');
+		var grParticipant = new GlideRecord('x_144441_badminton_m2m_players_tournaments');
+		grParticipant.addQuery('player', grPlayer.getUniqueValue());
+		grParticipant.addQuery('tournament', oRet.tournament);
+		grParticipant.query();
+		grParticipant.next();
+		var grRegisteredCategories;
+		var grCategories = new GlideRecord('x_144441_badminton_m2m_categories_tournaments');
+		grCategories.addQuery('tournament', oRet.tournament);
+		grCategories.query();
+		var sTmpQuery = '';
+		var oPartner = {};
+		var aPartnerCategories = [];
+		var sSkillLevel = '';
+		var bSelected = false;
+		var bReadonly = false;
+		while (grCategories.next()) {
+			bSelected = false;
+			bReadonly = false;
+			sTmpQuery = '';
+			oPartner = {name: 'partner'};
+			if (grCategories.category.type == 'double') {
+				sTmpQuery =  this.getPartnerQuery(oRet.player, oRet.gender, grCategories.category.sys_id, grCategories.category.gender, grCategories.category.type, oRet.tournament);
+			} // if double
+			grRegisteredCategories = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+			grRegisteredCategories.addQuery('badminton_m2m_players_tournaments', grParticipant.getUniqueValue());
+			grRegisteredCategories.addQuery('category', grCategories.category);
+			grRegisteredCategories.query();
+			if (grRegisteredCategories.next()) {
+				bSelected = true;
+				if ((grCategories.category.type == 'double') && (grRegisteredCategories.getValue('main_contact') == false)) {
+					oRet.info = 'You have already been registered by a partner for the double competion. Only your partner can change this registration.';
+					bReadonly = true;
+					aPartnerCategories.push({gender: grCategories.category.gender, skilllevel: grCategories.category.skilllevel});
+				} else {
+					oRet.skilllevel_readonly = true;
+				} // if partner registered
+				sSkillLevel = (sSkillLevel) ? sSkillLevel : String(grCategories.category.skilllevel);
+				oPartner = {name: 'partner', displayValue: String(grRegisteredCategories.partner.player.name), value: String(grRegisteredCategories.partner.player.sys_id)};
+			} // if registered
+			oRet.categories.push({readonly: bReadonly, id: String(grCategories.category), name: grCategories.category.getDisplayValue('name'), gender: String(grCategories.category.gender), skilllevel: String(grCategories.category.skilllevel), type: String(grCategories.category.type), partner: oPartner, selected: bSelected, query: sTmpQuery});
+		} // while categories in tournament
+		for (var i = oRet.categories.length - 1; i >= 0; --i) {
+			for (var ii = aPartnerCategories.length - 1; ii >= 0; --ii) {
+				if ((oRet.categories[i].type == 'double') && (oRet.categories[i].gender == aPartnerCategories[ii].gender) && (oRet.categories[i].skilllevel != aPartnerCategories[ii].skilllevel)) {
+					oRet.categories.splice(i,1);
+				} // if found remove
+			} // for partner categories
+		} // for categories
+		oRet.skilllevel = sSkillLevel;
+		//gs.info('getRegistrationData oRet: ' + JSON.stringify(oRet));	
+		return oRet;
+	}, // function get registration
+
+	setRegistrationData: function(oInput) {
+		//gs.info('setRegistrationData sUser: ' + JSON.stringify(oInput));
+		var oRet = {message: '', success: ''};
+		if (oInput.action == 'submit') {
+			var grParticipant = new GlideRecord('x_144441_badminton_m2m_players_tournaments');
+			grParticipant.addQuery('player', oInput.player);
+			grParticipant.addQuery('tournament', oInput.tournament);
+			grParticipant.query();
+			if (!grParticipant.next()) {
+				grParticipant.setValue('tournament', oInput.tournament);
+				grParticipant.setValue('player', oInput.player);
+				grParticipant.setValue('state', '1');
+				grParticipant.setValue('payment', false);
+				grParticipant.insert();
+			} // if participant
+			var grRegisteredCategories = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+			var aValidRegisteredCategories = [];
+			oInput.categories.forEach(function(oCategory) {
+				if ((oCategory.selected == true) && (oCategory.readonly == false)) {
+					grRegisteredCategories = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+					grRegisteredCategories.addQuery('badminton_m2m_players_tournaments', grParticipant.getUniqueValue());
+					grRegisteredCategories.addQuery('category', oCategory.id);
+					grRegisteredCategories.query();
+					grRegisteredCategories.setValue('badminton_m2m_players_tournaments', grParticipant.getUniqueValue());
+					gs.info('oCategory.type: ' + oCategory.type + ' oCategory.partner: ' + oCategory.partner);
+					if ((oCategory.type == 'double') && (oCategory.partner.value)) {
+						var grPartner = new GlideRecord('x_144441_badminton_m2m_players_tournaments');
+						grPartner.addQuery('player', oCategory.partner.value);
+						grPartner.addQuery('tournament ', oInput.tournament);
+						grPartner.query();
+						if (!grPartner.next()) {
+							grPartner.setValue('tournament', oInput.tournament);
+							grPartner.setValue('player', oCategory.partner.value);
+							grPartner.setValue('state', '1');
+							grPartner.setValue('payment', false);
+							grPartner.insert();
+						} // if partner
+						grRegisteredCategories.setValue('partner', grPartner.getUniqueValue());
+					} // if partner
+					if (grRegisteredCategories.next()) {
+						gs.info('ServerSideTools.setRegistrationData update: ' + grRegisteredCategories.getDisplayValue());
+						if (!grRegisteredCategories.update()) {
+							oRet.message += 'Error updating registration!\n';
+						} // if not success
+					} else {
+						grRegisteredCategories.setValue('main_contact', true);
+						grRegisteredCategories.setValue('category', oCategory.id);
+						gs.info('ServerSideTools.setRegistrationData insert: ' + oCategory.name);
+						if (!grRegisteredCategories.insert()) {
+							oRet.message += 'Error inserting registration!\n';
+						} // if not success
+					} // if registration exists
+					aValidRegisteredCategories.push(grRegisteredCategories.getUniqueValue());
+				} // if valid category
+			}); // each category
+			grRegisteredCategories = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
+			grRegisteredCategories.addQuery('badminton_m2m_players_tournaments', grParticipant.getUniqueValue());
+			grRegisteredCategories.addQuery('main_contact', true);
+			grRegisteredCategories.addEncodedQuery('sys_idNOT IN' + aValidRegisteredCategories.join(','));
+			grRegisteredCategories.query();
+			while (grRegisteredCategories.next()) {
+				gs.info('ServerSideTools.setRegistrationData remove: ' + grRegisteredCategories.getDisplayValue());
+				if (!grRegisteredCategories.deleteRecord()) {
+					oRet.message += 'Error removing registration!\n';
+				} // if not success
+			} // while remove
+		} // if action
+		if (!oRet.message) {
+			oRet.success = 'Successfully Saved!';
+		} // if no message
+		//gs.info('setRegistrationData oRet: ' + JSON.stringify(oRet));
+		return oRet;
+	}, // function set registration
 
 	type: 'ServerSideTools'
 };]]></script>
@@ -76,13 +309,13 @@ gs.info('getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' +
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>23</sys_mod_count>
+        <sys_mod_count>73</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-08-30 20:10:43</sys_updated_on>
+        <sys_updated_on>2018-08-31 20:59:45</sys_updated_on>
     </sys_script_include>
 </record_update>

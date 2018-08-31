@@ -11,7 +11,7 @@
         <short_description/>
         <size>md</size>
         <sp_column display_value="1">c3898f4b3780230045d9ae7873990ec2</sp_column>
-        <sp_widget display_value="btp_login_header">d11cb2a33744230045d9ae7873990ed1</sp_widget>
+        <sp_widget display_value="btp_header">d11cb2a33744230045d9ae7873990ed1</sp_widget>
         <sys_class_name>sp_instance</sys_class_name>
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-27 18:56:02</sys_created_on>
