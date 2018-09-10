@@ -83,7 +83,7 @@ ServerSideTools.prototype = {
 			oRet.info += grTournament.start_time.getLabel() + ': ' + grTournament.getDisplayValue('start_time') + '\n';
 			oRet.info += grTournament.end_time.getLabel() + ': ' + grTournament.getDisplayValue('end_time') + '\n';
 		} else {
-			oRet.message = 'Currently there is no active tournament!';
+			oRet.message = gs.getMessage('Currently there is no active tournament!');
 		} // if tournament
 		return oRet;
 	},
@@ -91,11 +91,11 @@ ServerSideTools.prototype = {
 	getAccountData: function(bLoggedIn, sUser, sAction) {
 		var oRet = {success: '', info: '', message: '', title: 'Account', bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: ''};
 		if (sAction == 'create') {
-			oRet.title = 'Create Account';
+			oRet.title = gs.getMessage('Create Account');
 		} else if (data.bLoggedIn == false) {
 			oRet.redirect("\bck?id=btp_login");
 		} else {
-			oRet.title = 'Edit Account';
+			oRet.title = gs.getMessage('Edit Account');
 			var grParticipant = new GlideRecord('x_144441_badminton_player');
 			grParticipant.addQuery('user', sUser);
 			grParticipant.query();
@@ -103,7 +103,7 @@ ServerSideTools.prototype = {
 				oRet.userfirst = grParticipant.user.first_name.getDisplayValue();
 				oRet.userlast = grParticipant.user.last_name.getDisplayValue();
 				oRet.useremail = grParticipant.user.email.getDisplayValue();
-				oRet.usergender = grParticipant.user.gender.getDisplayValue();
+				oRet.usergender = String(grParticipant.user.gender);
 				oRet.useryear = grParticipant.getValue('year');
 			} else {
 				oRet.redirect("\bck?id=btp_overview");
@@ -123,7 +123,7 @@ ServerSideTools.prototype = {
 			grUser.query();
 			if (grUser.next()) {
 				if (sAction == 'create') {
-					oRet.message = 'User already exists, cannot insert!';
+					oRet.message = gs.getMessage('User already exists, cannot insert!');
 					return oRet;
 				} // if create
 				grParticipant.addQuery('user', grUser.getUniqueValue());
@@ -148,7 +148,7 @@ ServerSideTools.prototype = {
 			} // if insert
 		} // if action
 		if (!oRet.message) {
-			oRet.success = 'Successfully Saved!';
+			oRet.success = gs.getMessage('Successfully Saved!');
 		} // if no message
 		//gs.info('setAccountData oRet: ' + JSON.stringify(oRet));
 		return oRet;
@@ -171,11 +171,11 @@ ServerSideTools.prototype = {
 		grTournament.addActiveQuery();
 		grTournament.query();
 		if (!grTournament.next()) {
-			oRet.message = 'Currently there is no active tournament!';
+			oRet.message = gs.getMessage('Currently there is no active tournament');
 			return;
 		} // if tournament
 		oRet.tournament = grTournament.getUniqueValue();
-		oRet.title = 'Registration for ' + grTournament.getValue('short_description');
+		oRet.title = gs.getMessage('Registration for') + ' ' + grTournament.getValue('short_description');
 		var grParticipant = new GlideRecord('x_144441_badminton_m2m_players_tournaments');
 		grParticipant.addQuery('player', grPlayer.getUniqueValue());
 		grParticipant.addQuery('tournament', oRet.tournament);
@@ -206,7 +206,7 @@ ServerSideTools.prototype = {
 			if (grRegisteredCategories.next()) {
 				bSelected = true;
 				if ((grCategories.category.type == 'double') && (grRegisteredCategories.getValue('main_contact') == false)) {
-					oRet.info = 'You have already been registered by a partner for the double competion. Only your partner can change this registration.';
+					oRet.info = gs.getMessage('You have already been registered by a partner for the double competion. Only your partner can change this registration.');
 					bReadonly = true;
 					aPartnerCategories.push({gender: grCategories.category.gender, skilllevel: grCategories.category.skilllevel});
 				} else {
@@ -292,12 +292,12 @@ ServerSideTools.prototype = {
 			while (grRegisteredCategories.next()) {
 				gs.info('ServerSideTools.setRegistrationData remove: ' + grRegisteredCategories.getDisplayValue());
 				if (!grRegisteredCategories.deleteRecord()) {
-					oRet.message += 'Error removing registration!\n';
+					oRet.message += gs.getMessage('Error removing registration!') + '\n';
 				} // if not success
 			} // while remove
 		} // if action
 		if (!oRet.message) {
-			oRet.success = 'Successfully Saved!';
+			oRet.success = gs.getMessage('Successfully Saved!');
 		} // if no message
 		//gs.info('setRegistrationData oRet: ' + JSON.stringify(oRet));
 		return oRet;
@@ -309,13 +309,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>73</sys_mod_count>
+        <sys_mod_count>77</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
-        <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-08-31 20:59:45</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-10 09:49:40</sys_updated_on>
     </sys_script_include>
 </record_update>

@@ -6,29 +6,29 @@
 	c.message = '';
 	c.genderchoicelistoption = {
 		hideSearch: true,
-		placeholder: "Gender"
+		placeholder: "${Gender}"
 	};
-	c.genderchoice = [{display:"Male",value: "Male"}, 
-					  {display:"Female",value: "Female"}];
+	c.genderchoice = [{display: "${Male}",value: "Male"}, 
+					  {display:"${Female}",value: "Female"}];
 	c.triggerSubmit = function() {
 		c.submitInProgress = true;
 		var aMandatory = ['userfirst', 'userlast', 'useremail', 'usergender', 'useryear'];
 		for(var i = 0; i < aMandatory.length; i++){
 			if (!c.data[aMandatory[i]]) {
-				c.data.message = 'Please fill out all the fields!';
+				c.data.message = '${Please fill out all the fields!}';
 				c.submitInProgress = false;
 			} // if field
 		} // each field
 		var reEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if (!reEmail.test( c.data.useremail.toLowerCase())) {
-			c.data.message = 'Please fill out a valid email!';
+			c.data.message = '${Please fill out a valid email!}';
 			c.submitInProgress = false;
 		} // if email
 		var iMinYear=new Date().getFullYear() - 5;
 		var iMaxYear=new Date().getFullYear() - 85;
 		var iYear = parseInt(c.data.useryear);
 		if ((isNaN(c.data.useryear)) || (iYear > iMinYear) || (iYear < iMaxYear)) {
-			c.data.message = 'Please fill out a valid year!';
+			c.data.message = '${Please fill out a valid year!}';
 			c.submitInProgress = false;
 		} // if year
 		if (c.submitInProgress) {
@@ -87,14 +87,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>111</sys_mod_count>
+        <sys_mod_count>114</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
-        <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-08-31 21:03:48</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-10 09:47:25</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>
@@ -110,12 +110,12 @@
   <div class="wrapper-md clearfix b-t">
     <div class="list-group list-group-sm"> 
       <div class="list-group-item"> 
-        <label for="userfirst">${Firstname}</label>
-        <input id="userfirst" name="userfirst" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Firstname}' autofocus="true" ng-model="c.data.userfirst"/>
+        <label for="userfirst">${First name}</label>
+        <input id="userfirst" name="userfirst" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${First name}' autofocus="true" ng-model="c.data.userfirst"/>
       </div>
       <div class="list-group-item"> 
-        <label for="userlast">${Lastname}</label>
-        <input id="userlast" name="userlast" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Lastname}' ng-model="c.data.userlast"/>
+        <label for="userlast">${Last name}</label>
+        <input id="userlast" name="userlast" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Last name}' ng-model="c.data.userlast"/>
       </div>
       <div class="list-group-item"> 
         <label for="useremail">${Email}</label>

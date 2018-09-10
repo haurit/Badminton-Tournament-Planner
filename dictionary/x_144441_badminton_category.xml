@@ -15,7 +15,7 @@
                 <element inactive_on_update="false" label="Hobby" sequence="100" value="hobby"/>
             </choice>
         </element>
-        <element calculation="(function calculatedFieldValue(current) {&#13;&#10;&#13;&#10;&#9;// Add your code here&#13;&#10;&#9;return '';  // return the calculated value&#13;&#10;&#13;&#10;})(current);" choice="1" label="Type" max_length="20" name="type" type="choice">
+        <element choice="1" label="Type" max_length="20" name="type" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Single" sequence="100" value="single"/>
                 <element inactive_on_update="false" label="Double" sequence="200" value="double"/>

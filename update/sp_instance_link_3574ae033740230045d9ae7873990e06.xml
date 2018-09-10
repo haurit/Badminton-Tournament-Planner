@@ -41,4 +41,17 @@
 }]]></widget_parameters>
     </sp_instance_link>
     <sys_translated_text action="delete_multiple" query="documentkey=3574ae033740230045d9ae7873990e06"/>
+    <sys_translated_text action="INSERT_OR_UPDATE">
+        <documentkey>3574ae033740230045d9ae7873990e06</documentkey>
+        <fieldname>title</fieldname>
+        <language>de</language>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-10 07:38:24</sys_created_on>
+        <sys_id>e0626f88dbe823008ddb4650399619e5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-10 07:38:24</sys_updated_on>
+        <tablename>sp_instance</tablename>
+        <value>Konto erstellen</value>
+    </sys_translated_text>
 </record_update>
