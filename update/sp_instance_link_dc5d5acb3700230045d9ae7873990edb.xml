@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_instance_link">
+    <sp_instance_link action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <class_name/>
+        <color>default</color>
+        <css/>
+        <glyph>user</glyph>
+        <id/>
+        <kb_article/>
+        <kb_category/>
+        <kb_topic/>
+        <order>2</order>
+        <roles/>
+        <sc_cat_item/>
+        <sc_category/>
+        <short_description/>
+        <size>md</size>
+        <sp_column display_value="2">d3c919d937f2130045d9ae7873990ee8</sp_column>
+        <sp_page display_value="btp_edit_account">5fcc3d103750230045d9ae7873990e6f</sp_page>
+        <sp_widget display_value="Icon Link">3caa67afcb13020000f8d856634c9c2e</sp_widget>
+        <sys_class_name>sp_instance_link</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-08-25 13:45:15</sys_created_on>
+        <sys_id>dc5d5acb3700230045d9ae7873990edb</sys_id>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Edit Account</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_instance_link_dc5d5acb3700230045d9ae7873990edb</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-08-30 12:20:07</sys_updated_on>
+        <title>Edit Account</title>
+        <type>page</type>
+        <url/>
+        <widget_parameters><![CDATA[{
+	"link_template": {
+		"value": "Circle Icon",
+		"displayValue": "Circle Icon"
+	}
+}]]></widget_parameters>
+    </sp_instance_link>
+    <sys_translated_text action="delete_multiple" query="documentkey=dc5d5acb3700230045d9ae7873990edb"/>
+    <sys_translated_text action="INSERT_OR_UPDATE">
+        <documentkey>dc5d5acb3700230045d9ae7873990edb</documentkey>
+        <fieldname>title</fieldname>
+        <language>de</language>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2018-09-10 07:41:22</sys_created_on>
+        <sys_id>a333e3c8dbe823008ddb4650399619e8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-10 07:41:22</sys_updated_on>
+        <tablename>sp_instance</tablename>
+        <value>Konto bearbeiten</value>
+    </sys_translated_text>
+</record_update>

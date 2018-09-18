@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, $location, $window, spUtil, $timeout, $log, spAriaUtil) {
+	var c = this;
+	c.skilllevelchoicelistoption = {
+		hideSearch: true,
+		placeholder: "${Skill Level}"
+	}; // choice option
+
+	c.skilllevelchoice = [{display:"${Active}",value: "active"}, 
+						  {display:"${Hobby}",value: "hobby"}];
+
+	c.filterCategories = function(oCategory) {
+		//console.log('ro: ' + oCategory.readonly + ' typeof: ' + typeof oCategory.readonly + ' JSON: ' + JSON.stringify(oCategory));
+		if ((!c.data.skilllevel) && (oCategory.readonly == false)) {
+			return false;
+		} else if (oCategory.readonly == true) {
+			return true;
+		} // if no skill
+		if ((oCategory.skilllevel == c.data.skilllevel) && ((oCategory.gender == String(c.data.gender).toLowerCase()) || (oCategory.gender == 'mixed'))) {
+			return true;
+		} // if valid
+	}; // filter categories
+
+	$scope.$on("field.change", function(evt, parms) {
+		console.log('Event: ' + evt + ' Param: ' + JSON.stringify(parms));
+	}); // on field change
+
+	$scope.$on("$locationChangeStart", function(evt, next, current) {
+		if (c.btp_registration.$dirty) {
+			if (!confirm(c.data.msgUnsaved)) {
+				evt.preventDefault();
+			} // if not confirmed
+		} // if dirty
+	}); // on location change
+
+	$window.onbeforeunload = function (e) {
+		e.returnValue = c.data.msgUnsaved;
+		return c.data.msgUnsaved;
+	}; // on unload
+
+	c.changeCheckbox = function(obj) {
+		c.data.skilllevel_readonly = false;
+		c.data.categories.forEach(function(oCat) {
+			if ((oCat.selected == true) && (oCat.readonly == false)) {
+				c.data.skilllevel_readonly = true;
+			}
+		});
+	};
+
+	c.triggerSubmit = function() {
+		c.submitInProgress = true;
+		c.data.action = 'submit';
+		if (c.submitInProgress) {
+			c.server.update().then(function(response) {
+				c.submitInProgress = false;
+				c.data.success = response.success;
+				c.data.message = response.message;
+				//if (c.data.success) {
+				c.btp_registration.$setPristine();
+				$timeout(function() {
+					c.data.success = '';
+				}, 3000);
+				$timeout(function() {
+					c.data.message = '';
+				}, 10000);
+				//} // if success
+			}); // if server update
+		} // if submit in progress
+	}; // function sumit
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>btp_registration</id>
+        <internal>false</internal>
+        <link/>
+        <name>btp_registration</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var _ServerSideTools = new ServerSideTools();
+	var oData = {};
+	if (!input) {
+		data.msgUnsaved = 'The form has unsaved data, do you want to leave?';
+		data.bLoggedIn = gs.getSession().isLoggedIn();
+		if (data.bLoggedIn == false) {
+			data.redirect("\bck?id=btp_login");
+			return;
+		} // if logged in
+		oData = _ServerSideTools.getRegistrationData(gs.getUserID());
+		Object.keys(oData).forEach(function(sKey) {
+			data[sKey] = oData[sKey];
+		}); // each key in data
+	} else {
+		oData = _ServerSideTools.setRegistrationData(input);
+		Object.keys(oData).forEach(function(sKey) {
+			data[sKey] = oData[sKey];
+		}); // each key in data
+	} // if input
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-08-30 09:06:29</sys_created_on>
+        <sys_id>6d7dcf6c3790230045d9ae7873990e23</sys_id>
+        <sys_mod_count>126</sys_mod_count>
+        <sys_name>btp_registration</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_widget_6d7dcf6c3790230045d9ae7873990e23</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2018-09-10 08:25:38</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+  <div class="panel-heading ng-scope">
+    <h3 class="panel-title">{{::data.title}}</h3>
+  </div>
+  <div ng-if="c.data.message || c.data.success" class="wrapper-md clearfix b-t">
+    <div ng-if="c.data.message" class="alert alert-danger ng-binding ng-scope" role="alert" style="">
+      {{c.data.message}}
+    </div>
+    <div ng-if="c.data.success" class="alert alert-success ng-binding ng-scope" role="alert" style="">
+      {{c.data.success}}
+    </div>
+  </div>
+  <div ng-if="data.tournament" class="wrapper-md clearfix b-t">
+    <form name="c.btp_registration">
+      <div class="list-group list-group-sm"> 
+        <div class="list-group-item"> 
+          <label for="skilllevel">${Skill Level}</label>
+          <sn-choice-list sn-model="c.data.skilllevel" sn-disabled="c.data.skilllevel_readonly" sn-options="c.skilllevelchoicelistoption" sn-value-field="value" sn-text-field="display" sn-items="c.skilllevelchoice" on-change="c.getCategories()"></sn-choice-list>
+        </div>
+        <div ng-repeat = "category in c.data.categories | filter:c.filterCategories | orderBy:'name' | orderBy:'-type'">
+          <div class="list-group-item"> 
+            <input type="checkbox" ng-disabled="category.readonly" ng-change="c.changeCheckbox()" ng-model="category.selected" value="">
+            <label for="selected">{{category.name}}</label>
+            <div ng-if="category.selected && category.type=='double'">
+              <label for="partner">${Partner}</label>
+              <sn-record-picker sn-disabled="category.readonly" id="category.id" placeholder="${Partner}" field="category.partner" table="'x_144441_badminton_player'" display-field="'name'" value-field="'sys_id'" search-fields="'name'" page-size="100" default-query="category.query"></sn-record-picker>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+	<div ng-if="c.data.info" class="wrapper-md clearfix b-t">
+    <div class="alert alert-info ng-binding ng-scope" role="alert" style="">
+      {{c.data.info}}
+    </div>
+  </div>
+    <button ng-disabled="c.submitInProgress" name="submit" ng-click="c.triggerSubmit()" class="btn btn-lg btn-primary btn-block">
+      <span ng-show="!c.submitInProgress">${Submit}</span>
+      <span ng-show="c.submitInProgress">${Saving...}</span>
+    </button>
+  </div>]]></template>
+    </sp_widget>
+</record_update>

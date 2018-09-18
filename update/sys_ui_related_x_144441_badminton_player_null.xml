@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_related sys_domain="global" table="x_144441_badminton_player" version="2" view="">
+        <sys_ui_related_list_entry action="INSERT_OR_UPDATE">
+            <filter/>
+            <list_id display_value="Player - Default view" name="x_144441_badminton_player" related_list="NULL" sys_domain="global" view="Default view">942d3a7537a6130045d9ae7873990e75</list_id>
+            <order_by/>
+            <position>0</position>
+            <related_list>x_144441_badminton_m2m_players_tournaments.player</related_list>
+            <sys_class_name>sys_ui_related_list_entry</sys_class_name>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-08 05:17:39</sys_created_on>
+            <sys_id>9c2d3a7537a6130045d9ae7873990e75</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-08 05:17:39</sys_updated_on>
+        </sys_ui_related_list_entry>
+        <sys_ui_related_list action="INSERT_OR_UPDATE">
+            <calculated_name>Player - Default view</calculated_name>
+            <filter/>
+            <name>x_144441_badminton_player</name>
+            <order_by/>
+            <position/>
+            <related_list/>
+            <sys_class_name>sys_ui_related_list</sys_class_name>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-08 05:17:39</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>942d3a7537a6130045d9ae7873990e75</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Player - Default view</sys_name>
+            <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+            <sys_update_name>sys_ui_related_x_144441_badminton_player_null</sys_update_name>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-08 05:17:39</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_related_list>
+    </sys_ui_related>
+</record_update>

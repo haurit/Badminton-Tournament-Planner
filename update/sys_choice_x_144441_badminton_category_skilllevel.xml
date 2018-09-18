@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_choice action="INSERT_OR_UPDATE" field="skilllevel" table="x_144441_badminton_category" version="3">
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>skilllevel</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Active</label>
+            <language>en</language>
+            <name>x_144441_badminton_category</name>
+            <sequence>100</sequence>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-07 19:31:14</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>8cd6743137a2130045d9ae7873990e73</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-07 19:31:14</sys_updated_on>
+            <value>active</value>
+        </sys_choice>
+        <sys_choice action="INSERT_OR_UPDATE">
+            <dependent_value/>
+            <element>skilllevel</element>
+            <hint/>
+            <inactive>false</inactive>
+            <label>Hobby</label>
+            <language>en</language>
+            <name>x_144441_badminton_category</name>
+            <sequence>100</sequence>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-07 19:31:27</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>61f6347137a2130045d9ae7873990e13</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-07 19:31:27</sys_updated_on>
+            <value>hobby</value>
+        </sys_choice>
+        <sys_choice_set action="INSERT_OR_UPDATE">
+            <element>skilllevel</element>
+            <name>x_144441_badminton_category</name>
+            <sys_class_name>sys_choice_set</sys_class_name>
+            <sys_created_by>tom</sys_created_by>
+            <sys_created_on>2018-06-07 19:31:14</sys_created_on>
+            <sys_id>d0729f63db10e300db63b7bc299619ed</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>skilllevel</sys_name>
+            <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+            <sys_update_name>sys_choice_x_144441_badminton_category_skilllevel</sys_update_name>
+            <sys_updated_by>tom</sys_updated_by>
+            <sys_updated_on>2018-06-07 19:31:14</sys_updated_on>
+        </sys_choice_set>
+    </sys_choice>
+</record_update>

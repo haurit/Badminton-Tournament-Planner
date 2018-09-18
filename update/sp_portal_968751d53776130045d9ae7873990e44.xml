@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_app">
-    <sys_app action="INSERT_OR_UPDATE">
-        <active>true</active>
-        <enforce_license>log</enforce_license>
-        <js_level>helsinki_es5</js_level>
-        <licensable>true</licensable>
-        <license_category>none</license_category>
-        <license_model>none</license_model>
-        <logo/>
-        <menu display_value="Badminton Tournament Planner">a93be0b53762130045d9ae7873990ef0</menu>
-        <name>Badminton Tournament Planner</name>
-        <private>false</private>
-        <restrict_table_access>false</restrict_table_access>
-        <runtime_access_tracking>permissive</runtime_access_tracking>
-        <scope>x_144441_badminton</scope>
-        <scoped_administration>false</scoped_administration>
-        <short_description/>
-        <source>x_144441_badminton</source>
-        <store_correlation_id/>
-        <store_url/>
-        <sys_class_name>sys_app</sys_class_name>
-        <sys_code/>
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_portal">
+    <sp_portal action="INSERT_OR_UPDATE">
+        <css_variables/>
+        <default>false</default>
+        <homepage display_value="btp_overview">2f5855d53776130045d9ae7873990ec4</homepage>
+        <icon/>
+        <kb_knowledge_base/>
+        <kb_knowledge_page/>
+        <login_page display_value="btp_login">b531e28f3700230045d9ae7873990eb7</login_page>
+        <logo>a0ed1ecb3700230045d9ae7873990e0d</logo>
+        <notfound_page display_value="404">3c2c9063cb11020000f8d856634c9c1f</notfound_page>
+        <quick_start_config/>
+        <sc_catalog/>
+        <sc_catalog_page/>
+        <sc_category_page/>
+        <sp_chat_queue/>
+        <sp_rectangle_menu/>
+        <sqanda_knowledge_base/>
+        <sys_class_name>sp_portal</sys_class_name>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-07 18:17:40</sys_created_on>
-        <sys_id>681664313722130045d9ae7873990e88</sys_id>
-        <sys_mod_count>1</sys_mod_count>
+        <sys_created_on>2018-06-18 18:54:26</sys_created_on>
+        <sys_id>968751d53776130045d9ae7873990e44</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Badminton Tournament</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_portal_968751d53776130045d9ae7873990e44</sys_update_name>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-07 18:40:07</sys_updated_on>
-        <template/>
-        <trackable>true</trackable>
-        <user_role display_value="admin" name="admin">2831a114c611228501d4ea6c309d626d</user_role>
-        <vendor/>
-        <vendor_prefix/>
-        <version>1.0.0</version>
-    </sys_app>
+        <sys_updated_on>2018-08-25 14:31:25</sys_updated_on>
+        <theme/>
+        <title>Badminton Tournament</title>
+        <url_suffix>bck</url_suffix>
+    </sp_portal>
+    <sys_translated_text action="delete_multiple" query="documentkey=968751d53776130045d9ae7873990e44"/>
     <sys_attachment action="INSERT_OR_UPDATE">
         <average_image_color>#8091bc</average_image_color>
         <chunk_size_bytes>734003</chunk_size_bytes>
@@ -43,32 +43,32 @@
         <image_width>91</image_width>
         <size_bytes>10354</size_bytes>
         <size_compressed>3651</size_compressed>
-        <state/>
+        <state>available</state>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-07 18:40:17</sys_created_on>
-        <sys_id>b73be8393762130045d9ae7873990ec6</sys_id>
+        <sys_created_on>2018-08-25 13:47:43</sys_created_on>
+        <sys_id>a0ed1ecb3700230045d9ae7873990e0d</sys_id>
         <sys_mod_count>2</sys_mod_count>
         <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-07 18:40:17</sys_updated_on>
-        <table_name>ZZ_YYsys_app</table_name>
-        <table_sys_id>681664313722130045d9ae7873990e88</table_sys_id>
+        <sys_updated_on>2018-08-25 13:47:44</sys_updated_on>
+        <table_name>ZZ_YYsp_portal</table_name>
+        <table_sys_id>968751d53776130045d9ae7873990e44</table_sys_id>
     </sys_attachment>
     <sys_attachment_doc action="INSERT_OR_UPDATE">
         <data>H4sIAAAAAAAAAA==</data>
         <length>16</length>
         <position>0</position>
-        <sys_attachment display_value="logo" sys_id="b73be8393762130045d9ae7873990ec6">b73be8393762130045d9ae7873990ec6</sys_attachment>
+        <sys_attachment display_value="logo" sys_id="a0ed1ecb3700230045d9ae7873990e0d">a0ed1ecb3700230045d9ae7873990e0d</sys_attachment>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-07 18:40:17</sys_created_on>
-        <sys_id>bf3be8393762130045d9ae7873990ec6</sys_id>
+        <sys_created_on>2018-08-25 13:47:43</sys_created_on>
+        <sys_id>a8ed1ecb3700230045d9ae7873990e0d</sys_id>
     </sys_attachment_doc>
     <sys_attachment_doc action="INSERT_OR_UPDATE">
         <data>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</data>
         <length>4856</length>
         <position>1</position>
-        <sys_attachment display_value="logo" sys_id="b73be8393762130045d9ae7873990ec6">b73be8393762130045d9ae7873990ec6</sys_attachment>
+        <sys_attachment display_value="logo" sys_id="a0ed1ecb3700230045d9ae7873990e0d">a0ed1ecb3700230045d9ae7873990e0d</sys_attachment>
         <sys_created_by>tom</sys_created_by>
-        <sys_created_on>2018-06-07 18:40:17</sys_created_on>
-        <sys_id>333be8393762130045d9ae7873990ec7</sys_id>
+        <sys_created_on>2018-08-25 13:47:43</sys_created_on>
+        <sys_id>2ced1ecb3700230045d9ae7873990e0d</sys_id>
     </sys_attachment_doc>
 </record_update>

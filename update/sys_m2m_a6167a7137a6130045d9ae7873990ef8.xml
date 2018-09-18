@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_m2m">
+    <sys_m2m action="INSERT_OR_UPDATE">
+        <from_table>x_144441_badminton_m2m_players_tournaments</from_table>
+        <m2m_from_field>badminton_m2m_players_tournaments</m2m_from_field>
+        <m2m_from_label>Categories</m2m_from_label>
+        <m2m_table>x_144441_badminton_m2m_categories_badminton_m2</m2m_table>
+        <m2m_to_field>category</m2m_to_field>
+        <m2m_to_label>Badminton M2m Players Tournaments</m2m_to_label>
+        <sys_class_name>sys_m2m</sys_class_name>
+        <sys_created_by>tom</sys_created_by>
+        <sys_created_on>2018-06-08 04:47:55</sys_created_on>
+        <sys_id>a6167a7137a6130045d9ae7873990ef8</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_144441_badminton_m2m_categories_badminton_m2</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_m2m_a6167a7137a6130045d9ae7873990ef8</sys_update_name>
+        <sys_updated_by>tom</sys_updated_by>
+        <sys_updated_on>2018-06-08 04:47:55</sys_updated_on>
+        <to_table>x_144441_badminton_category</to_table>
+    </sys_m2m>
+</record_update>

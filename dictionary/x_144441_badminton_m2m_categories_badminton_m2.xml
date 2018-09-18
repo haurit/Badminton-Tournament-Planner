@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Participant Category Map" max_length="40" name="x_144441_badminton_m2m_categories_badminton_m2" type="collection">
+        <element label="Participant" max_length="32" name="badminton_m2m_players_tournaments" read_only="true" reference="x_144441_badminton_m2m_players_tournaments" reference_floats="true" type="reference"/>
+        <element display="true" label="Category" max_length="32" name="category" read_only="true" reference="x_144441_badminton_category" type="reference"/>
+        <element label="Main Contact" max_length="40" name="main_contact" type="boolean"/>
+        <element label="Partner" max_length="32" name="partner" reference="x_144441_badminton_m2m_players_tournaments" reference_qual="javascript:new RefQualifier().getPartnerQuery()" type="reference" use_reference_qualifier="advanced"/>
+        <index name="index">
+            <element name="partner"/>
+        </index>
+        <index name="index2">
+            <element name="category"/>
+        </index>
+    </element>
+</database>
