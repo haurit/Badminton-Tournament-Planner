@@ -18,7 +18,7 @@ ServerSideTools.prototype = {
 	},
 
 	setPartner: function(sPartner, sPlayer, sCategory, sAction) {
-		gs.info('ServerSideTools.setPartner sPartner: ' + sPartner + ' sPlayer: ' + sPlayer + ' sCategory: ' + sCategory + ' sAction: ' + sAction);
+		//gs.info('ServerSideTools.setPartner sPartner: ' + sPartner + ' sPlayer: ' + sPlayer + ' sCategory: ' + sCategory + ' sAction: ' + sAction);
 		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
 		grParticipantCategoryMap.setWorkflow(false);
 		grParticipantCategoryMap.addQuery('category', sCategory);
@@ -48,13 +48,15 @@ ServerSideTools.prototype = {
 		} // if participant category map found
 	},
 
-	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sCatType, sTournament) {
+	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sCatType, sTournament, iMaxChildAge) {
 		var aQuery = [];
-		if (sCatGender != 'mixed') {
+		if ((sCatGender) && (sCatGender != 'mixed')) {
 			aQuery.push('user.gender=' + sCatGender);
-		} else {
+		} else if (sCatGender == 'mixed') {
 			aQuery.push('user.gender!=' + sGender);
-		} // if gender
+		} else {
+			aQuery.push('year>' + String(Number(new Date().getFullYear()) - iMaxChildAge));
+		} // if gender same or mixed or child
 		var aParticipant = [];
 		aParticipant.push(sUser); // cannot select self
 		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
@@ -175,6 +177,7 @@ ServerSideTools.prototype = {
 			return;
 		} // if tournament
 		oRet.tournament = grTournament.getUniqueValue();
+		oRet.max_child_age = grTournament.getValue('max_child_age');
 		oRet.title = gs.getMessage('Registration for') + ' ' + grTournament.getValue('short_description');
 		var grParticipant = new GlideRecord('x_144441_badminton_m2m_players_tournaments');
 		grParticipant.addQuery('player', grPlayer.getUniqueValue());
@@ -197,7 +200,7 @@ ServerSideTools.prototype = {
 			sTmpQuery = '';
 			oPartner = {name: 'partner'};
 			if (grCategories.category.type == 'double') {
-				sTmpQuery =  this.getPartnerQuery(oRet.player, oRet.gender, grCategories.category.sys_id, grCategories.category.gender, grCategories.category.type, oRet.tournament);
+				sTmpQuery =  this.getPartnerQuery(oRet.player, oRet.gender, grCategories.category.sys_id, grCategories.category.gender, grCategories.category.type, oRet.tournament, oRet.max_child_age);
 			} // if double
 			grRegisteredCategories = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
 			grRegisteredCategories.addQuery('badminton_m2m_players_tournaments', grParticipant.getUniqueValue());
@@ -309,13 +312,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>77</sys_mod_count>
+        <sys_mod_count>91</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-10 09:49:40</sys_updated_on>
+        <sys_updated_on>2019-02-09 15:01:53</sys_updated_on>
     </sys_script_include>
 </record_update>

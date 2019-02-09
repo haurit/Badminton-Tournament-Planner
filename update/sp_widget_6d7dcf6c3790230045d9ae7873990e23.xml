@@ -18,9 +18,9 @@
 		} else if (oCategory.readonly == true) {
 			return true;
 		} // if no skill
-		if ((oCategory.skilllevel == c.data.skilllevel) && ((oCategory.gender == String(c.data.gender).toLowerCase()) || (oCategory.gender == 'mixed'))) {
+		if (((oCategory.skilllevel == c.data.skilllevel) && ((oCategory.gender == String(c.data.gender).toLowerCase()) || (oCategory.gender == 'mixed') || (oCategory.gender == ''))) || (oCategory.gender == '' && oCategory.skilllevel == '')) {
 			return true;
-		} // if valid
+		} // if same skill, same gender or mixed or child category (empty gender and skill)
 	}; // filter categories
 
 	$scope.$on("field.change", function(evt, parms) {
@@ -112,14 +112,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-30 09:06:29</sys_created_on>
         <sys_id>6d7dcf6c3790230045d9ae7873990e23</sys_id>
-        <sys_mod_count>126</sys_mod_count>
+        <sys_mod_count>130</sys_mod_count>
         <sys_name>btp_registration</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_6d7dcf6c3790230045d9ae7873990e23</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-10 08:25:38</sys_updated_on>
+        <sys_updated_on>2019-02-09 14:10:09</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>
