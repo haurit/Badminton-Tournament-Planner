@@ -5,6 +5,7 @@
         <element label="Player" max_length="32" name="player" read_only="true" reference="x_144441_badminton_player" type="reference"/>
         <element choice="3" default="1" label="State" max_length="40" name="state" type="choice">
             <choice>
+                <element inactive_on_update="false" label="Inaktiv" sequence="0" value="0"/>
                 <element inactive_on_update="false" label="New" sequence="1" value="1"/>
                 <element inactive_on_update="false" label="Invitation Sent" sequence="10" value="10"/>
                 <element inactive_on_update="false" label="Registered" sequence="20" value="20"/>

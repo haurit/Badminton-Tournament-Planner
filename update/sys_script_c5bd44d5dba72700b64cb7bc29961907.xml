@@ -18,7 +18,7 @@
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>Delete Partner</name>
+        <name>Participant Category delete partner</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -29,10 +29,10 @@
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
 	var _ServerSideTools = new ServerSideTools();
-	var sPlayer = current.getValue('badminton_m2m_players_tournaments');
+	var sParticipant = current.getValue('badminton_m2m_players_tournaments');
 	var sPartner = current.getValue('partner');
 	var sCategory = current.getValue('category');
-	_ServerSideTools.setPartner(sPlayer, sPartner, sCategory, 'remove');
+	_ServerSideTools.setPartner(sParticipant, sPartner, sCategory, 'remove');
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -40,15 +40,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>c5bd44d5dba72700b64cb7bc29961907</sys_id>
-        <sys_mod_count>0</sys_mod_count>
-        <sys_name>Delete Partner</sys_name>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Participant Category delete partner</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_c5bd44d5dba72700b64cb7bc29961907</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-09 16:28:12</sys_updated_on>
+        <sys_updated_on>2019-02-10 20:48:04</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>

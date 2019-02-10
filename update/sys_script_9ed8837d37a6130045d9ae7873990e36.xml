@@ -18,7 +18,7 @@
         <filter_condition/>
         <is_rest>false</is_rest>
         <message/>
-        <name>Set Participant Name</name>
+        <name>Participant set name</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -38,15 +38,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>9ed8837d37a6130045d9ae7873990e36</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>Set Participant Name</sys_name>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Participant set name</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_9ed8837d37a6130045d9ae7873990e36</sys_update_name>
-        <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-06-08 06:21:48</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-02-10 19:07:29</sys_updated_on>
         <template/>
         <when>before</when>
     </sys_script>
