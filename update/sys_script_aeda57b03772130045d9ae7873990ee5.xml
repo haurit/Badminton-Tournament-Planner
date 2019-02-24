@@ -2,11 +2,11 @@
     <sys_script action="INSERT_OR_UPDATE">
         <abort_action>false</abort_action>
         <access>package_private</access>
-        <action_delete>false</action_delete>
+        <action_delete>true</action_delete>
         <action_insert>true</action_insert>
         <action_query>false</action_query>
         <action_update>true</action_update>
-        <active>false</active>
+        <active>true</active>
         <add_message>false</add_message>
         <advanced>true</advanced>
         <change_fields>false</change_fields>
@@ -20,7 +20,7 @@
         </filter_condition>
         <is_rest>false</is_rest>
         <message/>
-        <name>Participant Category Main after update</name>
+        <name>Participant Category Main changed</name>
         <order>100</order>
         <priority>100</priority>
         <rest_method/>
@@ -30,23 +30,11 @@
         <rest_variables/>
         <role_conditions/>
         <script><![CDATA[(function executeRule(current, previous /*null when async*/) {
-	var _ServerSideTools = new ServerSideTools();
-	var sParticipant = current.getValue('badminton_m2m_players_tournaments');
-	var sPartner = current.getValue('partner');
-	var sPartnerOld = previous.getValue('partner');
-	var sCategory = current.getValue('category');
-	gs.info('BR Participant Category Main after update sParticipant: ' + sParticipant + ' sPartner: ' + sPartner + ' sPartnerOld: ' + sPartnerOld);
-	if ((sPartner) && (!sPartnerOld)) { // if new partner
-		current.setValue('main_contact', true);
-		_ServerSideTools.setPartner(sParticipant, sPartner, sCategory, 'add');
-	} else if ((sPartner) && (sPartnerOld) && (sPartner != sPartnerOld)) { // if changed partner
-		_ServerSideTools.setPartner(sParticipant, sPartner, sCategory, 'add');
-		_ServerSideTools.setPartner(sParticipant, sPartnerOld, sCategory, 'remove');
-	} else if ((!sPartner) && (sPartnerOld)) { // if removed partner
-		current.setValue('main_contact', false);
-		_ServerSideTools.setPartner(sParticipant, sPartnerOld, sCategory, 'remove');
-	} // partner changes
-
+	gs.info('BR Participant Category Main changed current: ' + current.getDisplayValue() + ' Category: ' + current.category.type);
+	if (current.category.type == 'double') {
+		var _ServerSideTools = new ServerSideTools();
+		_ServerSideTools.setPartner(current, previous);
+	} // if double
 })(current, previous);]]></script>
         <sys_class_name>sys_script</sys_class_name>
         <sys_created_by>tom</sys_created_by>
@@ -54,15 +42,15 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>aeda57b03772130045d9ae7873990ee5</sys_id>
-        <sys_mod_count>10</sys_mod_count>
-        <sys_name>Participant Category Main after update</sys_name>
+        <sys_mod_count>15</sys_mod_count>
+        <sys_name>Participant Category Main changed</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_aeda57b03772130045d9ae7873990ee5</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-23 15:23:35</sys_updated_on>
+        <sys_updated_on>2019-02-24 17:29:32</sys_updated_on>
         <template/>
         <when>after</when>
     </sys_script>
