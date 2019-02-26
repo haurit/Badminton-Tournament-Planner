@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($scope, $http, $window, spUtil, $log, $timeout, spAriaUtil) {
+        <client_script><![CDATA[function($scope, $http, $location, $window, spUtil, $timeout, $log, spAriaUtil) {
 	var c = this;
 	c.message = '';
 	c.genderchoicelistoption = {
@@ -10,6 +10,20 @@
 	};
 	c.genderchoice = [{display: "${Male}",value: "Male"}, 
 					  {display:"${Female}",value: "Female"}];
+
+	$scope.$on("$locationChangeStart", function(evt, next, current) {
+		if (c.btp_account.$dirty) {
+			if (!confirm(c.data.msgUnsaved)) {
+				evt.preventDefault();
+			} // if not confirmed
+		} // if dirty
+	}); // on location change
+
+	$window.onbeforeunload = function (e) {
+		e.returnValue = c.data.msgUnsaved;
+		return c.data.msgUnsaved;
+	}; // on unload
+		
 	c.triggerSubmit = function() {
 		c.submitInProgress = true;
 		var aMandatory = ['userfirst', 'userlast', 'useremail', 'usergender', 'useryear'];
@@ -34,19 +48,20 @@
 		if (c.submitInProgress) {
 			c.data.action = 'submit';
 			c.server.update().then(function(response) {
+				c.submitInProgress = false;
+				c.data.success = response.success;
+				c.data.message = response.message;
+				c.btp_account.$setPristine();
 				if (response.success) {
-					c.data.success = response.success;
 					$timeout(function() {
+						c.data.success = '';
 						$window.location.href = '?id=btp_overview';
-					}, 400);
+					}, 1000);
 				} else {
-					c.submitInProgress = false;
-					c.data.message = response.message;
 					$timeout(function() {
 						c.data.message = '';
 					}, 10000);
-
-				} // if message
+				} // if success
 			});
 		}
 	};
@@ -71,6 +86,7 @@
 	var _ServerSideTools = new ServerSideTools();
 	var oData = {};
 	if (!input) {
+		data.msgUnsaved = gs.getMessage('The form has unsaved data, do you want to leave?');
 		oData = _ServerSideTools.getAccountData(gs.getSession().isLoggedIn(), gs.getUserID(), options.action);
 		Object.keys(oData).forEach(function(sKey) {
 			data[sKey] = oData[sKey];
@@ -87,19 +103,19 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>114</sys_mod_count>
+        <sys_mod_count>122</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2018-09-10 09:47:25</sys_updated_on>
+        <sys_updated_on>2019-02-26 20:41:16</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>
   </div>
-  <div ng-if="c.data.message" class="wrapper-md clearfix b-t">
+  <div ng-if="c.data.message || c.data.success" class="wrapper-md clearfix b-t">
     <div ng-if="c.data.message" class="alert alert-danger ng-binding ng-scope" role="alert" style="">
       {{c.data.message}}
     </div>
@@ -108,28 +124,30 @@
     </div>
   </div>
   <div class="wrapper-md clearfix b-t">
-    <div class="list-group list-group-sm"> 
-      <div class="list-group-item"> 
-        <label for="userfirst">${First name}</label>
-        <input id="userfirst" name="userfirst" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${First name}' autofocus="true" ng-model="c.data.userfirst"/>
+    <form name="c.btp_account">
+      <div class="list-group list-group-sm"> 
+        <div class="list-group-item"> 
+          <label for="userfirst">${First name}</label>
+          <input id="userfirst" name="userfirst" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${First name}' autofocus="true" ng-model="c.data.userfirst"/>
+        </div>
+        <div class="list-group-item"> 
+          <label for="userlast">${Last name}</label>
+          <input id="userlast" name="userlast" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Last name}' ng-model="c.data.userlast"/>
+        </div>
+        <div class="list-group-item"> 
+          <label for="useremail">${Email}</label>
+          <input id="useremail" type="email" name="useremail" ng-click="message = ''" class="ng-valid-email form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Email}' ng-model="c.data.useremail"/>
+        </div>
+        <div class="list-group-item"> 
+          <label for="usergender">${Gender}</label>
+          <sn-choice-list sn-model="c.data.usergender" sn-options="c.genderchoicelistoption" sn-value-field="value" sn-text-field="display" sn-items="c.genderchoice"></sn-choice-list>
+        </div>
+        <div class="list-group-item"> 
+          <label for="useryear">${Year}</label>
+          <input id="useryear" name="useryear" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Year}' ng-model="c.data.useryear"/>
+        </div>
       </div>
-      <div class="list-group-item"> 
-        <label for="userlast">${Last name}</label>
-        <input id="userlast" name="userlast" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Last name}' ng-model="c.data.userlast"/>
-      </div>
-      <div class="list-group-item"> 
-        <label for="useremail">${Email}</label>
-        <input id="useremail" type="email" name="useremail" ng-click="message = ''" class="ng-valid-email form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Email}' ng-model="c.data.useremail"/>
-      </div>
-      <div class="list-group-item"> 
-        <label for="usergender">${Gender}</label>
-        <sn-choice-list sn-model="c.data.usergender" sn-options="c.genderchoicelistoption" sn-value-field="value" sn-text-field="display" sn-items="c.genderchoice"></sn-choice-list>
-      </div>
-      <div class="list-group-item"> 
-        <label for="useryear">${Year}</label>
-        <input id="useryear" name="useryear" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Year}' ng-model="c.data.useryear"/>
-      </div>
-    </div>
+    </form>
     <button ng-disabled="c.submitInProgress" name="submit" ng-click="c.triggerSubmit()" class="btn btn-lg btn-primary btn-block">
       <span ng-show="!c.submitInProgress">${Submit}</span>
       <span ng-show="c.submitInProgress">${Saving...}</span>
