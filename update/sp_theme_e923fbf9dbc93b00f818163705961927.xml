@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_theme">
+    <sp_theme action="INSERT_OR_UPDATE">
+        <css_variables/>
+        <footer/>
+        <footer_fixed>false</footer_fixed>
+        <header/>
+        <name>btp_theme</name>
+        <navbar_fixed>false</navbar_fixed>
+        <sys_class_name>sp_theme</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-27 12:02:19</sys_created_on>
+        <sys_id>e923fbf9dbc93b00f818163705961927</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>btp_theme</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_theme_e923fbf9dbc93b00f818163705961927</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-27 12:02:19</sys_updated_on>
+    </sp_theme>
+</record_update>

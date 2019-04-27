@@ -9,7 +9,7 @@
 		placeholder: "${Gender}"
 	};
 	c.genderchoice = [{display: "${Male}",value: "Male"}, 
-					  {display:"${Female}",value: "Female"}];
+										{display:"${Female}",value: "Female"}];
 
 	$scope.$on("$locationChangeStart", function(evt, next, current) {
 		if (c.btp_account.$dirty) {
@@ -20,10 +20,12 @@
 	}); // on location change
 
 	$window.onbeforeunload = function (e) {
-		e.returnValue = c.data.msgUnsaved;
-		return c.data.msgUnsaved;
+		if (c.btp_account.$dirty) {
+			e.returnValue = c.data.msgUnsaved;
+			return c.data.msgUnsaved;
+		} // if dirty
 	}; // on unload
-		
+
 	c.triggerSubmit = function() {
 		c.submitInProgress = true;
 		var aMandatory = ['userfirst', 'userlast', 'useremail', 'usergender', 'useryear'];
@@ -51,8 +53,8 @@
 				c.submitInProgress = false;
 				c.data.success = response.success;
 				c.data.message = response.message;
-				c.btp_account.$setPristine();
 				if (response.success) {
+					c.btp_account.$setPristine();
 					$timeout(function() {
 						c.data.success = '';
 						$window.location.href = '?id=btp_overview';
@@ -103,14 +105,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>122</sys_mod_count>
+        <sys_mod_count>124</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-26 20:41:16</sys_updated_on>
+        <sys_updated_on>2019-04-27 10:05:17</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>

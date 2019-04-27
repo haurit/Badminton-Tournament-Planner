@@ -9,7 +9,7 @@
 	}; // choice option
 
 	c.skilllevelchoice = [{display:"${Active}",value: "active"}, 
-						  {display:"${Hobby}",value: "hobby"}];
+												{display:"${Hobby}",value: "hobby"}];
 
 	c.filterCategories = function(oCategory) {
 		//console.log('ro: ' + oCategory.readonly + ' typeof: ' + typeof oCategory.readonly + ' JSON: ' + JSON.stringify(oCategory));
@@ -36,8 +36,10 @@
 	}); // on location change
 
 	$window.onbeforeunload = function (e) {
-		e.returnValue = c.data.msgUnsaved;
-		return c.data.msgUnsaved;
+		if (c.btp_registration.$dirty) {
+			e.returnValue = c.data.msgUnsaved;
+			return c.data.msgUnsaved;
+		} // if dirty
 	}; // on unload
 
 	c.changeCheckbox = function(obj) {
@@ -47,7 +49,7 @@
 				c.data.skilllevel_readonly = true;
 			}
 		});
-	};
+	}; // function changeCheckbox
 
 	c.triggerSubmit = function() {
 		c.submitInProgress = true;
@@ -57,15 +59,15 @@
 				c.submitInProgress = false;
 				c.data.success = response.success;
 				c.data.message = response.message;
-				//if (c.data.success) {
-				c.btp_registration.$setPristine();
+				if (c.data.success) {
+					c.btp_registration.$setPristine();
+				} // if success
 				$timeout(function() {
 					c.data.success = '';
 				}, 3000);
 				$timeout(function() {
 					c.data.message = '';
 				}, 10000);
-				//} // if success
 			}); // if server update
 		} // if submit in progress
 	}; // function sumit
@@ -112,14 +114,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-30 09:06:29</sys_created_on>
         <sys_id>6d7dcf6c3790230045d9ae7873990e23</sys_id>
-        <sys_mod_count>134</sys_mod_count>
+        <sys_mod_count>138</sys_mod_count>
         <sys_name>btp_registration</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_6d7dcf6c3790230045d9ae7873990e23</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-26 20:29:54</sys_updated_on>
+        <sys_updated_on>2019-04-27 10:07:23</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>

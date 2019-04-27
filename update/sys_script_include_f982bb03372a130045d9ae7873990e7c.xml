@@ -171,14 +171,14 @@ ServerSideTools.prototype = {
 	},
 
 	setAccountData: function(oInput, sAction) {
-		gs.info('ServerSideTools.setAccountData sUser: ' + JSON.stringify(oInput));
+		gs.info('ServerSideTools.setAccountData sUser: ' + JSON.stringify(oInput) + ' sAction: ' + sAction);
 		var oRet = {message: '', success: ''};
 		if (oInput.action == 'submit') {
 			var bInsert = true;
 			var grUser = new GlideRecord('sys_user');
 			var grPlayer = new GlideRecord('x_144441_badminton_player');
-			if (oRet.usersysid) {
-				grUser.get(oRet.usersysid);
+			if (oInput.usersysid) {
+				grUser.get(oInput.usersysid);
 			} else {
 				grUser.addQuery('user_name', oInput.useremail);
 				grUser.query();
@@ -189,8 +189,8 @@ ServerSideTools.prototype = {
 					oRet.message = gs.getMessage('User already exists, cannot insert!');
 					return oRet;
 				} // if create
-				if (oRet.playersysid) {
-					grPlayer.get(oRet.playersysid);
+				if (oInput.playersysid) {
+					grPlayer.get(oInput.playersysid);
 				} else {	
 					grPlayer.addQuery('user', grUser.getUniqueValue());
 					grPlayer.query();
@@ -205,6 +205,7 @@ ServerSideTools.prototype = {
 			grUser.setValue('gender', oInput.usergender);
 			grPlayer.setValue('name', oInput.userfirst + ' ' + oInput.userlast + ' (' + oInput.useryear + ')');
 			grPlayer.setValue('year', oInput.useryear);
+			gs.info('ServerSideTools.setAccountData bInsert: ' + bInsert);
 			if (bInsert) {
 				grUser.insert();
 				grPlayer.setValue('user', grUser.getUniqueValue());
@@ -217,7 +218,7 @@ ServerSideTools.prototype = {
 		if (!oRet.message) {
 			oRet.success = gs.getMessage('Successfully Saved!');
 		} // if no message
-		//gs.info('ServerSideTools.setAccountData oRet: ' + JSON.stringify(oRet));
+		gs.info('ServerSideTools.setAccountData oRet: ' + JSON.stringify(oRet));
 		return oRet;
 	}, // function set registration
 
@@ -360,13 +361,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>131</sys_mod_count>
+        <sys_mod_count>134</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-02-26 20:38:10</sys_updated_on>
+        <sys_updated_on>2019-04-27 11:25:27</sys_updated_on>
     </sys_script_include>
 </record_update>
