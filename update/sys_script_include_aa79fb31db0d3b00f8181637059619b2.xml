@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_144441_badminton.Notifications</api_name>
+        <client_callable>false</client_callable>
+        <description/>
+        <name>Notifications</name>
+        <script><![CDATA[var Notifications = Class.create();
+Notifications.prototype = {
+	initialize: function() {
+	},
+
+	// Called by Notification --> Recipients Table --> Attribute "Table choices script"
+	process: function() { 
+		return ['x_144441_badminton_player', 'x_144441_badminton_m2m_players_tournaments', 'sys_user']; 
+	}, // function process
+
+	// Called by UI Action ""
+	sendNotification: function(grNotif) {
+		gs.info('Notifications.sendNotification grNotif: ' + grNotif.getDisplayValue());
+		gs.info('Notifications.sendNotification grNotif: ' + grNotif.getValue('recipient_table') + ' grNotif: ' + grNotif.getValue('recipient_condition'));
+		var oEmail = {};
+		var sTable = grNotif.getValue('recipient_table');
+		var sCondition = grNotif.getValue('recipient_condition');
+		if (sCondition) {
+			var grRecipients = new GlideRecord(sTable);
+			grRecipients.addEncodedQuery(sCondition);
+			grRecipients.query();
+			while (grRecipients.next()) {
+				if (sTable == 'x_144441_badminton_m2m_players_tournaments') {
+					oEmail[grRecipients.player.user.email] = grRecipients.player.user.email;
+				} else if (sTable == 'x_144441_badminton_player') {
+					oEmail[grRecipients.user.email] = grRecipients.user.email;
+				} else if (sTable == 'sys_user') {
+					oEmail[grRecipients.email] = grRecipients.email;
+				} // if table
+			} // while recipients
+		} // if condition
+		var grRecipientsManual = new GlideRecord('x_144441_badminton_m2m_players_notifications');
+		grRecipientsManual.addQuery('notification', grNotif.getUniqueValue());
+		grRecipientsManual.query();
+		while (grRecipientsManual.next()) {
+			oEmail[grRecipientsManual.player.user.email] = grRecipientsManual.player.user.email;
+		} // while recipients manual
+		Object.keys(oEmail).forEach(function(sEmail) {
+			gs.eventQueue('x_144441_badminton.notification', grNotif, sEmail, gs.getUserID());
+		}, this); // each email
+	}, // function sendNotification
+
+	type: 'Notifications'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-04-27 12:30:04</sys_created_on>
+        <sys_id>aa79fb31db0d3b00f8181637059619b2</sys_id>
+        <sys_mod_count>6</sys_mod_count>
+        <sys_name>Notifications</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_script_include_aa79fb31db0d3b00f8181637059619b2</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-04-27 13:34:24</sys_updated_on>
+    </sys_script_include>
+</record_update>

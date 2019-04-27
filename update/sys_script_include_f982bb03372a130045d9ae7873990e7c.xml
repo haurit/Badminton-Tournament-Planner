@@ -126,7 +126,7 @@ ServerSideTools.prototype = {
 	},
 
 	getHeaderData: function(bLoggedIn, sUser, sPage) {
-		gs.info('ServerSideTools.getRegistrationData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage);
+		gs.info('ServerSideTools.getHeaderData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage);
 		var oRet = {success: '', info: '', message: '', title: '', bLoggedIn: false, user: sUser, userName: gs.getUserDisplayName(), html: ''};
 		var grTournament = new GlideRecord('x_144441_badminton_tournament');
 		grTournament.addActiveQuery();
@@ -139,6 +139,8 @@ ServerSideTools.prototype = {
 			oRet.info += grTournament.start_time.getLabel() + ': ' + grTournament.getDisplayValue('start_time') + '\n';
 			oRet.info += grTournament.end_time.getLabel() + ': ' + grTournament.getDisplayValue('end_time') + '\n';
 		} else {
+			oRet.title = gs.getMessage('Currently there is no active tournament!');
+			oRet.info = gs.getMessage('Currently there is no active tournament!');
 			oRet.message = gs.getMessage('Currently there is no active tournament!');
 		} // if tournament
 		return oRet;
@@ -239,8 +241,9 @@ ServerSideTools.prototype = {
 		grTournament.addActiveQuery();
 		grTournament.query();
 		if (!grTournament.next()) {
+			oRet.title = gs.getMessage('Currently there is no active tournament');
 			oRet.message = gs.getMessage('Currently there is no active tournament');
-			return;
+			return oRet;
 		} // if tournament
 		oRet.tournament = grTournament.getUniqueValue();
 		oRet.max_child_age = grTournament.getValue('max_child_age');
@@ -361,13 +364,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>134</sys_mod_count>
+        <sys_mod_count>139</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-04-27 11:25:27</sys_updated_on>
+        <sys_updated_on>2019-04-27 13:19:06</sys_updated_on>
     </sys_script_include>
 </record_update>

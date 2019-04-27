@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Notification Recipients" max_length="40" name="x_144441_badminton_m2m_players_notifications" type="collection">
+        <element label="Notification" max_length="32" name="notification" reference="x_144441_badminton_notification" type="reference"/>
+        <element label="Player" max_length="32" name="player" reference="x_144441_badminton_player" type="reference"/>
+        <index name="index">
+            <element name="notification"/>
+        </index>
+        <index name="index2">
+            <element name="player"/>
+        </index>
+    </element>
+</database>

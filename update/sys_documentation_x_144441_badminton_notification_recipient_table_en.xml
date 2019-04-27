@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="recipient_table" label="Recipient Table" language="en" table="x_144441_badminton_notification">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>recipient_table</element>
+            <help/>
+            <hint/>
+            <label>Recipient Table</label>
+            <language>en</language>
+            <name>x_144441_badminton_notification</name>
+            <plural>Recipient Tables</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-04-27 12:56:47</sys_created_on>
+            <sys_id>03bf3775db0d3b00f81816370596197b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Recipient Table</sys_name>
+            <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+            <sys_update_name>sys_documentation_x_144441_badminton_notification_recipient_table_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-04-27 12:56:47</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>
