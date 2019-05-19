@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="gdpr_consent_date" label="GDPR Consent Date" language="en" table="x_144441_badminton_player">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>gdpr_consent_date</element>
+            <help/>
+            <hint/>
+            <label>GDPR Consent Date</label>
+            <language>en</language>
+            <name>x_144441_badminton_player</name>
+            <plural>GDPR Consent Dates</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-05-12 14:12:44</sys_created_on>
+            <sys_id>b9f06dfadb91f340b64cb7bc2996191e</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>GDPR Consent Date</sys_name>
+            <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+            <sys_update_name>sys_documentation_x_144441_badminton_player_gdpr_consent_date_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-05-12 14:12:44</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

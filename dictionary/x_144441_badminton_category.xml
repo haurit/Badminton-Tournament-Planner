@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
-    <element label="Category" max_length="40" name="x_144441_badminton_category" type="collection">
+    <element audit="true" label="Category" max_length="40" name="x_144441_badminton_category" type="collection">
         <element choice="1" label="Gender" max_length="40" name="gender" type="choice">
             <choice>
                 <element inactive_on_update="false" label="Female" sequence="100" value="female"/>

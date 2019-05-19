@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>AccountEmailVerify</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(/* GlideRecord */ current, /* TemplatePrinter */ template,
+						/* Optional EmailOutbound */ email, /* Optional GlideRecord */ email_action,
+						/* Optional GlideRecord */ event) {
+	var _Notifications = new Notifications();
+	template.print("<a href=" + _Notifications.accountEmailVerify(current) + ">Hier bestätigen</a>");
+
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-19 18:58:58</sys_created_on>
+        <sys_id>36e222c1dbe97700f81816370596192e</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>AccountEmailVerify</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_script_email_36e222c1dbe97700f81816370596192e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-19 18:58:58</sys_updated_on>
+    </sys_script_email>
+</record_update>

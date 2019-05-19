@@ -146,15 +146,39 @@ ServerSideTools.prototype = {
 		return oRet;
 	},
 
-	getAccountData: function(bLoggedIn, sUser, sAction) {
-		var oRet = {success: '', info: '', message: '', title: 'Account', bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: ''};
+	getAccountData: function(bLoggedIn, sUser, sAction, sToken) {
+		var oRet = {success: '', info: '', message: '', title: 'Account', bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: '', bAccountEmailVerify: false};
+		var grPlayer = new GlideRecord('x_144441_badminton_player');
+		if (sToken) {
+			gs.info('sToken: ' + sToken);
+			grPlayer.addQuery('token', sToken);
+			grPlayer.query();
+			if(grPlayer.next()){ 
+				gs.info('sToken: ' + sToken + ' player: ' + grPlayer.getDisplayValue());
+				var grUser = new GlideRecord('sys_user');
+				if (grUser.get(grPlayer.getValue('user'))) {
+					grUser.setValue('active', true);
+					grUser.update();
+					oRet.bAccountEmailVerify = true;
+				} // if valid user
+			} // if valid player
+		} // if token
+
+		oRet.gdprlink = '?id=btp_gdpr';
 		if (sAction == 'create') {
 			oRet.title = gs.getMessage('Create Account');
-		} else if (data.bLoggedIn == false) {
+			if (bLoggedIn == true) {
+				oRet.title = gs.getMessage('Create Partner Account');
+				oRet.gdprlink = '';
+			} // if logged in
+		} else if (bLoggedIn == false) {
 			oRet.redirect("\bck?id=btp_login");
 		} else {
-			oRet.title = gs.getMessage('Edit Account');
-			var grPlayer = new GlideRecord('x_144441_badminton_player');
+			if (sAction == 'remove') {
+				oRet.title = gs.getMessage('Remove Account');
+			} else {
+				oRet.title = gs.getMessage('Edit Account');
+			} // if remove
 			grPlayer.addQuery('user', sUser);
 			grPlayer.query();
 			if (grPlayer.next()) {
@@ -169,6 +193,7 @@ ServerSideTools.prototype = {
 				oRet.redirect("\bck?id=btp_overview");
 			} // if user
 		} // if action
+
 		return oRet;
 	},
 
@@ -176,7 +201,7 @@ ServerSideTools.prototype = {
 		gs.info('ServerSideTools.setAccountData sUser: ' + JSON.stringify(oInput) + ' sAction: ' + sAction);
 		var oRet = {message: '', success: ''};
 		if (oInput.action == 'submit') {
-			var bInsert = true;
+			var bInsert = true, bEmailChanged = false;
 			var grUser = new GlideRecord('sys_user');
 			var grPlayer = new GlideRecord('x_144441_badminton_player');
 			if (oInput.usersysid) {
@@ -191,6 +216,16 @@ ServerSideTools.prototype = {
 					oRet.message = gs.getMessage('User already exists, cannot insert!');
 					return oRet;
 				} // if create
+				if (sAction == 'remove') {
+					grUser.deleteRecord();
+					grPlayer.deleteRecord();
+					var grUserSession = new GlideRecord('v_user_session'); 
+					grUserSession.get('session_id',gs.getSession().sessionID); 
+					grUserSession.setValue('locked', true); 
+					grUserSession.update(); 
+					oRet.message = gs.getMessage('User removed, logout now!');
+					return oRet;
+				} // if create
 				if (oInput.playersysid) {
 					grPlayer.get(oInput.playersysid);
 				} else {	
@@ -198,6 +233,13 @@ ServerSideTools.prototype = {
 					grPlayer.query();
 					grPlayer.next();
 				} // if playerid
+				if (grUser.getValue('email') != oInput.useremail) {
+					bEmailChanged = true;
+					var sToken = grPlayer.getUniqueValue() + GlideSecureRandomUtil.getSecureRandomString(10);
+					grPlayer.setValue('token', sToken);
+					grUser.setValue('active', false); // deactivate user until email is verified
+					gs.info('Email changed, set token: ' + grPlayer.getValue('token') + ' active: ' + grUser.getValue('active'));
+				} // if email change
 				bInsert = false;
 			} // if new user
 			grUser.setValue('user_name', oInput.useremail);
@@ -207,16 +249,27 @@ ServerSideTools.prototype = {
 			grUser.setValue('gender', oInput.usergender);
 			grPlayer.setValue('name', oInput.userfirst + ' ' + oInput.userlast + ' (' + oInput.useryear + ')');
 			grPlayer.setValue('year', oInput.useryear);
+			grPlayer.setValue('gdpr_consent', oInput.gdprconsent);
+			grPlayer.setValue('gdpr_consent_date', new GlideDateTime().getDisplayValue());
+			grPlayer.setValue('gdpr_consent_ip', gs.getSession().getClientIP());
 			gs.info('ServerSideTools.setAccountData bInsert: ' + bInsert);
 			if (bInsert) {
 				grUser.insert();
 				grPlayer.setValue('user', grUser.getUniqueValue());
-				grPlayer.insert();
+				if (grPlayer.insert()) {
+					if (oInput.bLoggedIn == true) {
+						gs.eventQueue('x_144441_badminton.account_partner_creat', grPlayer, grUser.getValue('email'));
+					} // if partner
+				} // if insert
 			} else {
 				grUser.update();
 				grPlayer.update();
 			} // if insert
+			if (bEmailChanged) {
+				gs.eventQueue('x_144441_badminton.account_email_verify', grPlayer, grUser.getValue('email'));
+			} // if email change
 		} // if action
+
 		if (!oRet.message) {
 			oRet.success = gs.getMessage('Successfully Saved!');
 		} // if no message
@@ -364,13 +417,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>139</sys_mod_count>
+        <sys_mod_count>163</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-04-27 13:19:06</sys_updated_on>
+        <sys_updated_on>2019-05-19 20:00:00</sys_updated_on>
     </sys_script_include>
 </record_update>

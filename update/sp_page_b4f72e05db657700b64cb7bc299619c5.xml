@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_page">
+    <sp_page action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <css/>
+        <draft>false</draft>
+        <dynamic_title_structure/>
+        <id>btp_verify_account</id>
+        <internal>false</internal>
+        <public>false</public>
+        <roles/>
+        <short_description/>
+        <sys_class_name>sp_page</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-19 19:09:11</sys_created_on>
+        <sys_id>b4f72e05db657700b64cb7bc299619c5</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>btp_verify_account</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_page_b4f72e05db657700b64cb7bc299619c5</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-05-19 19:09:11</sys_updated_on>
+        <title>Verify Account</title>
+    </sp_page>
+    <sys_translated_text action="delete_multiple" query="documentkey=b4f72e05db657700b64cb7bc299619c5"/>
+</record_update>

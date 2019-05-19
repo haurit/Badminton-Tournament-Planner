@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_scope_privilege">
+    <sys_scope_privilege action="INSERT_OR_UPDATE">
+        <operation>read</operation>
+        <source_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</source_scope>
+        <status>allowed</status>
+        <sys_class_name>sys_scope_privilege</sys_class_name>
+        <sys_created_by>fritzfratz@hauri.biz</sys_created_by>
+        <sys_created_on>2019-05-12 20:06:52</sys_created_on>
+        <sys_id>5d02febadb913300f818163705961957</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>v_user_session</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_scope_privilege_5d02febadb913300f818163705961957</sys_update_name>
+        <sys_updated_by>fritzfratz@hauri.biz</sys_updated_by>
+        <sys_updated_on>2019-05-12 20:06:52</sys_updated_on>
+        <target_name>v_user_session</target_name>
+        <target_scope display_value="Global">global</target_scope>
+        <target_type>sys_db_object</target_type>
+    </sys_scope_privilege>
+</record_update>
