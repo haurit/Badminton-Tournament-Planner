@@ -234,10 +234,9 @@ ServerSideTools.prototype = {
 					return oRet;
 				} // if create
 				if (sAction == 'remove') {
-					gs.eventQueue('x_144441_badminton.account.deactivate', grUser, sAction);
+					grUser.setValue('locked_out', true);
 					oRet.message = gs.getMessage('User removed, logout now!');
 					oRet.redirect = '/logout.do';
-					return oRet;
 				} // if create
 				if (oInput.playersysid) {
 					grPlayer.get(oInput.playersysid);
@@ -289,26 +288,6 @@ ServerSideTools.prototype = {
 		gs.info('ServerSideTools.setAccountData oRet: ' + JSON.stringify(oRet));
 		return oRet;
 	}, // function set registration
-
-
-	disableUser: function(grEvent, grUser) {
-		if (grUser.isValidRecord()) {
-			var sAction = grEvent.getValue('parm1');
-			if (sAction == 'remove') {
-				var grPlayer = new GlideRecord('x_144441_badminton_player');
-				grPlayer.addQuery('user', grUser.getUniqueValue());
-				grPlayer.query();
-				if (grPlayer.next()) {
-					grPlayer.deleteRecord();
-				} // if player
-				grUser.deleteRecord();
-			} else if (sAction == 'disable') {
-				grUser.setValue('active', false);
-				grUser.update();
-			} // if action
-		} // if valid user
-	},
-
 
 	getRegistrationData: function(sUser) {
 		//gs.info('ServerSideTools.getRegistrationData sUser: ' + sUser);
@@ -449,13 +428,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>193</sys_mod_count>
+        <sys_mod_count>195</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-09 14:10:05</sys_updated_on>
+        <sys_updated_on>2019-06-09 14:21:39</sys_updated_on>
     </sys_script_include>
 </record_update>
