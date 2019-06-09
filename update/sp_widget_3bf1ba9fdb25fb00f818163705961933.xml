@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[function($scope, $http, $location, $window, spUtil, $timeout, $log) {
+	/* widget controller */
+	var c = this;
+
+	$timeout(function() {
+		$window.location.href = c.data.redirect;
+	}, 3000);
+
+}]]></client_script>
+        <controller_as>c</controller_as>
+        <css/>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id>btp_account_verify</id>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {  }]]></link>
+        <name>btp_account_verify</name>
+        <option_schema/>
+        <public>true</public>
+        <roles/>
+        <script><![CDATA[(function() {
+	var _ServerSideTools = new ServerSideTools();
+	var oData = {};
+	data.sToken = decodeURIComponent($sp.getParameter('guid'));
+	if (data.sToken) {
+		oData = _ServerSideTools.validateEmail(data.sToken);
+		Object.keys(oData).forEach(function(sKey) {
+			data[sKey] = oData[sKey];
+		}); // each key in data
+	} // if token
+})();
+]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-05-26 19:39:26</sys_created_on>
+        <sys_id>3bf1ba9fdb25fb00f818163705961933</sys_id>
+        <sys_mod_count>12</sys_mod_count>
+        <sys_name>btp_account_verify</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sp_widget_3bf1ba9fdb25fb00f818163705961933</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-06-09 14:06:27</sys_updated_on>
+        <template><![CDATA[<div class="panel panel-default">
+  <div class="panel-heading ng-scope">
+    <h3 class="panel-title">{{::data.title}}</h3>
+  </div>
+  <div ng-if="c.data.message || c.data.success" class="wrapper-md clearfix b-t">
+    <div ng-if="c.data.message" class="alert alert-danger ng-binding ng-scope" role="alert" style="">
+      {{c.data.message}}
+    </div>
+    <div ng-if="c.data.success" class="alert alert-success ng-binding ng-scope" role="alert" style="">
+      {{c.data.success}}
+    </div>
+  </div>
+</div>]]></template>
+    </sp_widget>
+</record_update>

@@ -10,10 +10,6 @@
 	};
 	c.genderchoice = [{display: "${Male}",value: "Male"}, 
 										{display:"${Female}",value: "Female"}];
-	
-	if (c.data.bAccountEmailVerify) {
-		$window.location.href = '?id=btp_login';
-	} // if account email verify
 
 	$scope.$on("$locationChangeStart", function(evt, next, current) {
 		if (c.btp_account.$dirty) {
@@ -60,11 +56,13 @@
 				c.submitInProgress = false;
 				c.data.success = response.success;
 				c.data.message = response.message;
+				c.data.redirect = response.redirect;
 				if (response.success) {
 					c.btp_account.$setPristine();
 					$timeout(function() {
 						c.data.success = '';
-						$window.location.href = '?id=btp_overview';
+						console.log('redirect: ' + c.data.redirect);
+						$window.location.href = c.data.redirect;
 					}, 1000);
 				} else {
 					$timeout(function() {
@@ -95,10 +93,9 @@
 	var _ServerSideTools = new ServerSideTools();
 	var oData = {};
 	if (!input) {
-		data.sToken = decodeURIComponent($sp.getParameter('guid'));
 		data.msgUnsaved = gs.getMessage('The form has unsaved data, do you want to leave?');
 		data.bLoggedIn = gs.getSession().isLoggedIn();
-		oData = _ServerSideTools.getAccountData(data.bLoggedIn, gs.getUserID(), options.action, data.sToken);
+		oData = _ServerSideTools.getAccountData(data.bLoggedIn, gs.getUserID(), options.action);
 		Object.keys(oData).forEach(function(sKey) {
 			data[sKey] = oData[sKey];
 		}); // each key in data
@@ -114,14 +111,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>133</sys_mod_count>
+        <sys_mod_count>143</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-19 19:58:40</sys_updated_on>
+        <sys_updated_on>2019-05-26 19:40:30</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>
@@ -157,9 +154,9 @@
           <label for="useryear">${Year}</label>
           <input id="useryear" name="useryear" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="text" placeholder='${Year}' ng-model="c.data.useryear"/>
         </div>
-        <div class="list-group-item" ng-show="{{data.gdprlink}}"> 
+        <div class="list-group-item" ng-show="c.data.gdprlink"> 
           <label for="gdprconsent">${GDPR consent}</label>
-          <div>${GDPR consent msg}<a href="{{data.gdprlink}}" target="_blank">${GDPR consent link}</a></div>
+          <div>${GDPR consent msg}<a href="{{c.data.gdprlink}}" target="_blank">${GDPR consent link}</a></div>
           <input id="gdprconsent" name="gdprconsent" ng-click="message = ''" class="form-control no-border ng-pristine ng-valid ng-empty ng-touched" type="checkbox" ng-model="c.data.gdprconsent"/>
         </div>
       </div>

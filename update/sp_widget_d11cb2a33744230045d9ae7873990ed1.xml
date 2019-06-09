@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
     <sp_widget action="INSERT_OR_UPDATE">
         <category>custom</category>
-        <client_script><![CDATA[function($window, $sce) {
+        <client_script><![CDATA[function($window, $sce, $timeout) {
 	var c = this;
 	c.html = $sce.trustAsHtml(c.data.html);
+
+	if (c.data.redirect) {
+		$timeout(function() {
+			$window.location.href = c.data.redirect;
+		}, 10);
+	}
+
 }]]></client_script>
         <controller_as>c</controller_as>
         <css/>
@@ -32,14 +39,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-27 05:16:37</sys_created_on>
         <sys_id>d11cb2a33744230045d9ae7873990ed1</sys_id>
-        <sys_mod_count>32</sys_mod_count>
+        <sys_mod_count>34</sys_mod_count>
         <sys_name>btp_header</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_d11cb2a33744230045d9ae7873990ed1</sys_update_name>
-        <sys_updated_by>tom</sys_updated_by>
-        <sys_updated_on>2018-08-31 20:05:41</sys_updated_on>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-06-09 14:08:16</sys_updated_on>
         <template><![CDATA[<ng-bind-html ng-bind-html="c.html"></ng-bind-html>
 <div class="alert alert-info ng-binding ng-scope" role="alert" style="">
   <pre>{{c.data.info}}</pre>
