@@ -121,12 +121,11 @@ ServerSideTools.prototype = {
 			aParticipant.push(String(grParticipantCategoryMap.partner.player));
 		} // each participant which has already a partner
 		aQuery.push('sys_idNOT IN' + aParticipant.join(','));
-		//gs.info('ServerSideTools.getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
+		gs.info('ServerSideTools.getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
 		return aQuery.join('^');
 	},
 
 	getHeaderData: function(bLoggedIn, sUser, sPage) {
-		gs.info('ServerSideTools.getHeaderData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage);
 		var oRet = {success: '', info: '', message: '', title: '', bLoggedIn: false, user: sUser, userName: gs.getUserDisplayName(), html: '', redirect: ''};
 		var grTournament = new GlideRecord('x_144441_badminton_tournament');
 		grTournament.addActiveQuery();
@@ -143,14 +142,31 @@ ServerSideTools.prototype = {
 			oRet.info = gs.getMessage('Currently there is no active tournament!');
 			oRet.message = gs.getMessage('Currently there is no active tournament!');
 		} // if tournament
-		if ((bLoggedIn) && (sPage == 'btp_login')) {
-			oRet.redirect = '\bck?id=btp_overview';
-		} // if already logged in and page is login
+		if (bLoggedIn) {
+			if ((sPage != 'btp_edit_account') && (sPage != 'btp_remove_account')) {
+				var grPlayer = new GlideRecord('x_144441_badminton_player');
+				grPlayer.addQuery('user', gs.getUserID());
+				grPlayer.query();
+				if (grPlayer.next()) {
+					if (grPlayer.getValue('gdpr_consent') == false) {
+						oRet.info = gs.getMessage('Please accept the GDPR before using our site!');
+						oRet.redirect = '/bck?id=btp_edit_account';
+					} // if not gdpr
+				} else {
+					oRet.info = gs.getMessage('Please edit your data before using our site!');
+					oRet.redirect = '/bck?id=btp_edit_account';
+				} // if player
+			} // if not edit or remove
+			if (sPage == 'btp_login') {
+				oRet.redirect = '/bck?id=btp_overview';
+			} // if consent or page is login
+		} // if already logged
+		gs.info('ServerSideTools.getHeaderData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage + ' redirect: ' + oRet.redirect);
 		return oRet;
 	},
 
 	validateEmail: function(sToken) {
-		var oRet = {success: '', message: '', title: 'Validate Email Account', redirect: '\bck?id=btp_login'};
+		var oRet = {success: '', message: '', title: 'Validate Email Account', redirect: '/bck?id=btp_login'};
 		if (sToken) {
 			var sUserId = '';
 			var grPlayer = new GlideRecord('x_144441_badminton_player');
@@ -177,20 +193,23 @@ ServerSideTools.prototype = {
 	},
 
 	getAccountData: function(bLoggedIn, sUser, sAction) {
-		var oRet = {success: '', info: '', message: '', title: 'Account', bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: ''};
+		var oRet = {success: '', info: '', message: '', title: 'Account', buttontxt: gs.getMessage('Submit'), bLoggedIn: bLoggedIn, userfirst: '', userlast: '', useremail: '', usergender: '', useryear: '', redirect: '', gdprlink: '', gdprmsg: ''};
 		var grPlayer = new GlideRecord('x_144441_badminton_player');
 		oRet.gdprlink = '?id=btp_gdpr';
 		if (sAction == 'create') {
 			oRet.title = gs.getMessage('Create Account');
+			oRet.buttontxt = gs.getMessage('Create Account');
 			if (bLoggedIn == true) {
 				oRet.title = gs.getMessage('Create Partner Account');
+				oRet.buttontxt = gs.getMessage('Create Partner Account');
 				oRet.gdprlink = '';
 			} // if logged in
 		} else if (bLoggedIn == false) {
-			oRet.redirect("\bck?id=btp_login");
+			oRet.redirect("/bck?id=btp_login");
 		} else {
 			if (sAction == 'remove') {
 				oRet.title = gs.getMessage('Remove Account');
+				oRet.buttontxt = gs.getMessage('Remove Account');
 				oRet.message = gs.getMessage('Please confirm account removal!');
 				oRet.gdprlink = '';
 			} else {
@@ -206,11 +225,21 @@ ServerSideTools.prototype = {
 				oRet.useremail = grPlayer.user.email.getDisplayValue();
 				oRet.usergender = String(grPlayer.user.gender);
 				oRet.useryear = grPlayer.getValue('year');
+				oRet.gdprconsent = (grPlayer.getValue('gdpr_consent') == '0') ? false : true;
+				oRet.gdprmsg = (oRet.gdprconsent) ? gs.getMessage('Consent given on {0} from IP {1}', [grPlayer.getDisplayValue('gdpr_consent_date'), grPlayer.getValue('gdpr_consent_ip')]) : '';
 			} else {
-				oRet.redirect = '\bck?id=btp_overview';
-			} // if user
+				var grUser = new GlideRecord('sys_user');
+				if (grUser.get(sUser)) {
+					oRet.userfirst = grUser.first_name.getDisplayValue();
+					oRet.userlast = grUser.last_name.getDisplayValue();
+					oRet.useremail = grUser.email.getDisplayValue();
+					oRet.usersysid = grUser.getUniqueValue();
+				} else {
+					//oRet.redirect = '/bck?id=btp_overview';
+				} // if user
+			} // if player
 		} // if action
-
+		gs.info('ServerSideTools.getAccountData oRet: ' + JSON.stringify(oRet));
 		return oRet;
 	},
 
@@ -218,7 +247,7 @@ ServerSideTools.prototype = {
 		gs.info('ServerSideTools.setAccountData sUser: ' + JSON.stringify(oInput) + ' sAction: ' + sAction);
 		var oRet = {message: '', success: '', redirect: '?id=btp_overview'};
 		if (oInput.action == 'submit') {
-			var bInsert = true, bEmailChanged = false;
+			var bInsertUser = true, bInsertPlayer = true, bEmailChanged = false;
 			var grUser = new GlideRecord('sys_user');
 			var grPlayer = new GlideRecord('x_144441_badminton_player');
 			if (oInput.usersysid) {
@@ -229,29 +258,34 @@ ServerSideTools.prototype = {
 				grUser.next();
 			} // if userid
 			if (grUser.isValidRecord()) {
+				bInsertUser = false;
 				if (sAction == 'create') {
 					oRet.message = gs.getMessage('User already exists, cannot insert!');
 					return oRet;
 				} // if create
-				if (sAction == 'remove') {
-					grUser.setValue('locked_out', true);
-					oRet.message = gs.getMessage('User removed, logout now!');
-					oRet.redirect = '/logout.do';
-				} // if create
 				if (oInput.playersysid) {
-					grPlayer.get(oInput.playersysid);
+					if (grPlayer.get(oInput.playersysid)) {
+						bInsertPlayer = false;
+					} // if player
 				} else {	
 					grPlayer.addQuery('user', grUser.getUniqueValue());
 					grPlayer.query();
-					grPlayer.next();
+					if (grPlayer.next()) {
+						bInsertPlayer = false;
+					} // if player
 				} // if playerid
+				if (sAction == 'remove') {
+					grUser.setValue('locked_out', true);
+					gs.eventQueue('x_144441_badminton.account_removal', grPlayer);
+					oRet.success = gs.getMessage('User removed, logout now!');
+					oRet.redirect = '/logout.do';
+				} // if create
 				if (grUser.getValue('email') != oInput.useremail) {
 					bEmailChanged = true;
 					var sToken = grPlayer.getUniqueValue() + GlideSecureRandomUtil.getSecureRandomString(10);
 					grPlayer.setValue('token', sToken);
 					grUser.setValue('locked_out', true);
 				} // if email change
-				bInsert = false;
 			} // if new user
 			grUser.setValue('user_name', oInput.useremail);
 			grUser.setValue('first_name', oInput.userfirst);
@@ -261,21 +295,43 @@ ServerSideTools.prototype = {
 			grPlayer.setValue('name', oInput.userfirst + ' ' + oInput.userlast + ' (' + oInput.useryear + ')');
 			grPlayer.setValue('year', oInput.useryear);
 			grPlayer.setValue('gdpr_consent', oInput.gdprconsent);
-			grPlayer.setValue('gdpr_consent_date', new GlideDateTime().getDisplayValue());
-			grPlayer.setValue('gdpr_consent_ip', gs.getSession().getClientIP());
-			if (bInsert) {
-				grUser.insert();
+			if (oInput.gdprconsent == true) {
+				grPlayer.setValue('gdpr_consent_date', new GlideDateTime().getDisplayValue());
+				grPlayer.setValue('gdpr_consent_ip', gs.getSession().getClientIP());
+			} else {
+				grPlayer.setValue('gdpr_consent_date', '');
+				grPlayer.setValue('gdpr_consent_ip', '');
+			} // if no consent
+			if (bInsertUser) {
+				if (grUser.insert()) {
+					gs.info('ServerSideTools.setAccountData grUser insert : ' + grUser.getDisplayValue());
+				} else {
+					gs.info('ServerSideTools.setAccountData grUser insert failed: ' + grUser.getLastErrorMessage());
+				} // if user insert
+			} else {
+				if (grUser.update()) {
+					gs.info('ServerSideTools.setAccountData grUser update : ' + grUser.getDisplayValue());
+				} else {
+					gs.info('ServerSideTools.setAccountData grUser update failed: ' + grUser.getLastErrorMessage());
+				} // if user update
+			} // if bInsertUser insert
+			if (bInsertPlayer) {
 				grPlayer.setValue('user', grUser.getUniqueValue());
 				if (grPlayer.insert()) {
+					gs.info('ServerSideTools.setAccountData grPlayer insert : ' + grPlayer.getDisplayValue());
 					if (oInput.bLoggedIn == true) {
 						gs.eventQueue('x_144441_badminton.account_partner_creat', grPlayer, grUser.getValue('email'));
 					} // if partner
-				} // if insert
+				} else {
+					gs.info('ServerSideTools.setAccountData grPlayer insert failed: ' + grPlayer.getLastErrorMessage());
+				} // if player insert
 			} else {
-				var sUpdateUser = grUser.update();
-				var sUpdatePlayer = grPlayer.update();
-				gs.info('ServerSideTools.setAccountData update sUpdateUser : ' + sUpdateUser + ' grUser: ' + grUser.getLastErrorMessage());
-			} // if insert
+				if (grPlayer.update()) { 
+					gs.info('ServerSideTools.setAccountData grPlayer update : ' + grPlayer.getDisplayValue());
+				} else {
+					gs.info('ServerSideTools.setAccountData grPlayer update failed: ' + grPlayer.getLastErrorMessage());
+				} // if player update
+			} // if bInsertPlayer insert
 			if (bEmailChanged) {
 				gs.info('ServerSideTools.setAccountData email changed, user: ' + grUser.getValue('user_name') + ' email: ' + grUser.getValue('email') + ' token: ' + grPlayer.getValue('token') + ' active: ' + grUser.getValue('active'));
 				gs.eventQueue('x_144441_badminton.account_email_verify', grPlayer, grUser.getValue('email'));
@@ -428,13 +484,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>195</sys_mod_count>
+        <sys_mod_count>218</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-09 14:21:39</sys_updated_on>
+        <sys_updated_on>2019-06-10 20:58:55</sys_updated_on>
     </sys_script_include>
 </record_update>

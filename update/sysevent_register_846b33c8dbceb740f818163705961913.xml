@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sysevent_register">
+    <sysevent_register action="INSERT_OR_UPDATE">
+        <description>User has confirmed account removal</description>
+        <event_name>x_144441_badminton.account_removal</event_name>
+        <fired_by>SI ServerSideTools setAccountData</fired_by>
+        <queue/>
+        <suffix>account_removal</suffix>
+        <sys_class_name>sysevent_register</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-06-10 19:12:41</sys_created_on>
+        <sys_id>846b33c8dbceb740f818163705961913</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_144441_badminton.account_removal</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sysevent_register_846b33c8dbceb740f818163705961913</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-06-10 19:12:41</sys_updated_on>
+        <table>x_144441_badminton_player</table>
+    </sysevent_register>
+</record_update>
