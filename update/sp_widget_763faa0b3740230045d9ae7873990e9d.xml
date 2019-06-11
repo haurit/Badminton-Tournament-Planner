@@ -33,16 +33,14 @@
 			if (!c.data[aMandatory[i]]) {
 				c.data.message = '${Please fill out all the fields!}';
 				c.submitInProgress = false;
+				return;
 			} // if field
 		} // each field
-		if ((c.data.gdprlink) && (!c.data.gdprconsent)) {
-				c.data.message = '${Please give your consent to the GDPR!}';
-				c.submitInProgress = false;
-		} // if not partner account
 		var reEmail = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 		if (!reEmail.test( c.data.useremail.toLowerCase())) {
 			c.data.message = '${Please fill out a valid email!}';
 			c.submitInProgress = false;
+			return;
 		} // if email
 		var iMinYear=new Date().getFullYear() - 5;
 		var iMaxYear=new Date().getFullYear() - 85;
@@ -50,7 +48,13 @@
 		if ((isNaN(c.data.useryear)) || (iYear > iMinYear) || (iYear < iMaxYear)) {
 			c.data.message = '${Please fill out a valid year!}';
 			c.submitInProgress = false;
+			return;
 		} // if year
+		if ((c.data.gdprlink) && (!c.data.gdprconsent)) {
+				c.data.message = '${Please give your consent to the GDPR!}';
+				c.submitInProgress = false;
+				return;
+		} // if not partner account
 		if (c.submitInProgress) {
 			c.data.action = 'submit';
 			c.server.update().then(function(response) {
@@ -112,14 +116,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-25 15:03:31</sys_created_on>
         <sys_id>763faa0b3740230045d9ae7873990e9d</sys_id>
-        <sys_mod_count>147</sys_mod_count>
+        <sys_mod_count>148</sys_mod_count>
         <sys_name>btp_account</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_763faa0b3740230045d9ae7873990e9d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-10 19:00:37</sys_updated_on>
+        <sys_updated_on>2019-06-11 19:23:16</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>

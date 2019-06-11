@@ -22,14 +22,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2019-05-04 13:47:02</sys_created_on>
         <sys_id>e35e0818db55bf00f818163705961968</sys_id>
-        <sys_mod_count>3</sys_mod_count>
-        <sys_name>Remove Account</sys_name>
+        <sys_mod_count>4</sys_mod_count>
+        <sys_name>Konto löschen</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_instance_link_e35e0818db55bf00f818163705961968</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-04 13:50:51</sys_updated_on>
+        <sys_updated_on>2019-06-11 19:41:39</sys_updated_on>
         <title>Remove Account</title>
         <type>page</type>
         <url/>
@@ -41,4 +41,30 @@
 }]]></widget_parameters>
     </sp_instance_link>
     <sys_translated_text action="delete_multiple" query="documentkey=e35e0818db55bf00f818163705961968"/>
+    <sys_translated_text action="INSERT_OR_UPDATE">
+        <documentkey>e35e0818db55bf00f818163705961968</documentkey>
+        <fieldname>short_description</fieldname>
+        <language>de</language>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-06-11 19:41:39</sys_created_on>
+        <sys_id>64fb496cdb0ef740f818163705961970</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-06-11 19:41:39</sys_updated_on>
+        <tablename>sp_instance_link</tablename>
+        <value/>
+    </sys_translated_text>
+    <sys_translated_text action="INSERT_OR_UPDATE">
+        <documentkey>e35e0818db55bf00f818163705961968</documentkey>
+        <fieldname>title</fieldname>
+        <language>de</language>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-06-11 19:41:39</sys_created_on>
+        <sys_id>68fb496cdb0ef740f818163705961972</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-06-11 19:41:39</sys_updated_on>
+        <tablename>sp_instance_link</tablename>
+        <value>Konto löschen</value>
+    </sys_translated_text>
 </record_update>
