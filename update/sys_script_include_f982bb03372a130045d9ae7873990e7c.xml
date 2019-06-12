@@ -103,10 +103,13 @@ ServerSideTools.prototype = {
 
 	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sCatType, sTournament, iMaxChildAge) {
 		var aQuery = [];
+		var sPartCatMapGenderQuery = '';
 		if ((sCatGender) && (sCatGender != 'mixed')) {
 			aQuery.push('user.gender=' + sCatGender);
+			sPartCatMapGenderQuery = 'player.user.gender!=' + sCatGender;
 		} else if (sCatGender == 'mixed') {
 			aQuery.push('user.gender!=' + sGender);
+			sPartCatMapGenderQuery = 'player.user.gender=' + sCatGender;
 		} else {
 			aQuery.push('year>' + String(Number(new Date().getFullYear()) - iMaxChildAge));
 		} // if gender same or mixed or child
@@ -115,13 +118,16 @@ ServerSideTools.prototype = {
 		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
 		grParticipantCategoryMap.addQuery('badminton_m2m_players_tournaments.tournament', sTournament);
 		grParticipantCategoryMap.addQuery('category.type', sCatType);
+		if (sPartCatMapGenderQuery) {
+			grParticipantCategoryMap.addEncodedQuery(sPartCatMapGenderQuery);
+		} // if partner cat map gender
 		grParticipantCategoryMap.addNotNullQuery('partner');
 		grParticipantCategoryMap.query();
 		while (grParticipantCategoryMap.next()) {
 			aParticipant.push(String(grParticipantCategoryMap.partner.player));
 		} // each participant which has already a partner
 		aQuery.push('sys_idNOT IN' + aParticipant.join(','));
-		gs.info('ServerSideTools.getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
+		gs.info('ServerSideTools.getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatType: ' + sCatType + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' query: ' + aQuery.join('^'));
 		return aQuery.join('^');
 	},
 
@@ -484,13 +490,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>219</sys_mod_count>
+        <sys_mod_count>221</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-11 19:38:17</sys_updated_on>
+        <sys_updated_on>2019-06-12 14:34:27</sys_updated_on>
     </sys_script_include>
 </record_update>
