@@ -23,7 +23,7 @@
         <digest_text/>
         <digestable>false</digestable>
         <event_name>x_144441_badminton.account_partner_creat</event_name>
-        <event_parm_1>false</event_parm_1>
+        <event_parm_1>true</event_parm_1>
         <event_parm_2>false</event_parm_2>
         <exclude_delegates>false</exclude_delegates>
         <force_delivery>false</force_delivery>
@@ -36,15 +36,8 @@
         <mandatory>false</mandatory>
         <message/>
         <message_html><![CDATA[<p>Hallo ${user.first_name}</p>
-<p>Der&nbsp;${sys_created_by} hat f&uuml;r Dich einen Account angelegt damit er Dich beim Doppel anmelden kann.&nbsp;&nbsp;</p>
-<p>Melde Dich bitte auf unserer Seite an um&nbsp;Deine Teilname zu best&auml;tigen.</p>
-<p>Benutzername: ${user.email}</p>
-<p>Password: ${user.user_password}</p>
-<p>Liebe Gr&uuml;sse und wir freuen uns auf Deine Teilnahme!</p>
-<p>OK Badminton Turnier</p>
-<p>BC Kreuzlingen</p>
-<p>&nbsp;</p>
-<p>PS:&nbsp;F&uuml;r allf&auml;llige Anmeldung wirst Du ein separates Mail erhalten.</p>]]></message_html>
+<p>${mail_script:AccountEmailPartnerUser} hat f&uuml;r Dich einen Account angelegt um Dich in einer Doppelkategorie anmelden zu k&ouml;nnen. Wir haben Dir ein Email mit Deinem Login geschickt, bitte melde Dich an um die Teilnahme zu best&auml;tigen und Dich f&uuml;r weitere Kategorien anzumelden!</p>
+<p>Liebe Gr&uuml;sse und wir freuen uns auf Deine Teilnahme!<br />Turnier OK<br />BC Kreuzlingen</p>]]></message_html>
         <message_list/>
         <message_text/>
         <name>Account Partner Create</name>
@@ -55,10 +48,10 @@
         <recipient_groups/>
         <recipient_users/>
         <reply_to/>
-        <send_self>true</send_self>
+        <send_self>false</send_self>
         <sms_alternate/>
         <style/>
-        <subject>BC Kreuzlingen Turnier Anmeldung</subject>
+        <subject>BC Kreuzlingen Turnier: Anmeldung durch Partner</subject>
         <subscribable>false</subscribable>
         <sys_class_name>sysevent_email_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -66,7 +59,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>5e5f1ecddb257700b64cb7bc2996196d</sys_id>
-        <sys_mod_count>2</sys_mod_count>
+        <sys_mod_count>9</sys_mod_count>
         <sys_name>Account Partner Create</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
@@ -74,7 +67,7 @@
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sysevent_email_action_5e5f1ecddb257700b64cb7bc2996196d</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-19 18:42:44</sys_updated_on>
+        <sys_updated_on>2019-08-25 19:13:14</sys_updated_on>
         <sys_version>2</sys_version>
         <template/>
         <type>email</type>

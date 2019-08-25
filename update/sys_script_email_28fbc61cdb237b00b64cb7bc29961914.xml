@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>AccountEmailLogin</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[(function runMailScript(/* GlideRecord */ current, /* TemplatePrinter */ template,
+						/* Optional EmailOutbound */ email, /* Optional GlideRecord */ email_action,
+						/* Optional GlideRecord */ event) {
+	var _Notifications = new Notifications();
+	template.print("<a href=" + _Notifications.accountEmailLogin(current) + ">Login</a>");
+
+})(current, template, email, email_action, event);]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2019-08-24 19:16:58</sys_created_on>
+        <sys_id>28fbc61cdb237b00b64cb7bc29961914</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>AccountEmailLogin</sys_name>
+        <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+        <sys_update_name>sys_script_email_28fbc61cdb237b00b64cb7bc29961914</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2019-08-24 19:17:30</sys_updated_on>
+    </sys_script_email>
+</record_update>

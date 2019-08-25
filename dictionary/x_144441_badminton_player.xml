@@ -3,6 +3,7 @@
         <element label="GDPR Consent" max_length="40" name="gdpr_consent" read_only="true" type="boolean"/>
         <element label="GDPR Consent Date" max_length="40" name="gdpr_consent_date" read_only="true" type="glide_date_time"/>
         <element label="GDPR Consent IP" max_length="40" name="gdpr_consent_ip" read_only="true" type="ip_addr"/>
+        <element label="Club Member" max_length="40" name="member" type="boolean"/>
         <element display="true" label="Name" max_length="254" name="name" read_only="true" type="string"/>
         <element label="Token" max_length="80" name="token" type="string"/>
         <element label="User" max_length="32" name="user" reference="sys_user" reference_cascade_rule="delete" type="reference"/>

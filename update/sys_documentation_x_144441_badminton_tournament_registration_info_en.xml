@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="registration_info" label="Registration Info" language="en" table="x_144441_badminton_tournament">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>registration_info</element>
+            <help/>
+            <hint/>
+            <label>Registration Info</label>
+            <language>en</language>
+            <name>x_144441_badminton_tournament</name>
+            <plural>Registration Infos</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2019-08-25 09:06:23</sys_created_on>
+            <sys_id>02c949e0dba7bb00f81816370596193b</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Registration Info</sys_name>
+            <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
+            <sys_update_name>sys_documentation_x_144441_badminton_tournament_registration_info_en</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2019-08-25 09:06:23</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

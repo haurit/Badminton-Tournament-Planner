@@ -115,14 +115,14 @@
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-08-30 09:06:29</sys_created_on>
         <sys_id>6d7dcf6c3790230045d9ae7873990e23</sys_id>
-        <sys_mod_count>142</sys_mod_count>
+        <sys_mod_count>143</sys_mod_count>
         <sys_name>btp_registration</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy/>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sp_widget_6d7dcf6c3790230045d9ae7873990e23</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-05-26 19:25:00</sys_updated_on>
+        <sys_updated_on>2019-08-24 20:24:39</sys_updated_on>
         <template><![CDATA[<div class="panel panel-default">
   <div class="panel-heading ng-scope">
     <h3 class="panel-title">{{::data.title}}</h3>
@@ -139,7 +139,7 @@
     <form name="c.btp_registration">
       <div class="list-group list-group-sm"> 
         <div class="list-group-item"> 
-          <label for="skilllevel">${Skill Level}</label>
+          <label for="skilllevel" uib-tooltip="${Skill Level Tooltip}">${Skill Level}</label>
           <sn-choice-list sn-model="c.data.skilllevel" sn-disabled="c.data.skilllevel_readonly" sn-options="c.skilllevelchoicelistoption" sn-value-field="value" sn-text-field="display" sn-items="c.skilllevelchoice" on-change="c.getCategories()"></sn-choice-list>
         </div>
         <div ng-repeat = "category in c.data.categories | filter:c.filterCategories | orderBy:'name' | orderBy:'-type'">

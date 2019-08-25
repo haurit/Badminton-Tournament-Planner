@@ -38,9 +38,7 @@
         <message_html><![CDATA[<p>Hallo ${user.first_name}</p>
 <p>Deine Email Adresse wurde ge&auml;ndert. Bitte best&auml;tige den Vorgang durch das Klicken auf den unten stehenden Link:</p>
 <p>${mail_script:AccountEmailVerify}</p>
-<p>Liebe Gr&uuml;sse,</p>
-<p>Turnier OK</p>
-<p>BC Kreuzlingen</p>
+<p>Liebe Gr&uuml;sse,<br />Turnier OK<br />BC Kreuzlingen</p>
 <p>&nbsp;</p>]]></message_html>
         <message_list/>
         <message_text/>
@@ -55,7 +53,7 @@
         <send_self>true</send_self>
         <sms_alternate/>
         <style/>
-        <subject>BC Kreuzlingen: Email Adresse wurde geändert</subject>
+        <subject>BC Kreuzlingen Turnier: Email Adresse wurde geändert</subject>
         <subscribable>false</subscribable>
         <sys_class_name>sysevent_email_action</sys_class_name>
         <sys_created_by>admin</sys_created_by>
@@ -63,7 +61,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>dea36681db657700b64cb7bc29961952</sys_id>
-        <sys_mod_count>6</sys_mod_count>
+        <sys_mod_count>8</sys_mod_count>
         <sys_name>Account Email Verify</sys_name>
         <sys_overrides/>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
@@ -71,7 +69,7 @@
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sysevent_email_action_dea36681db657700b64cb7bc29961952</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-09 14:02:15</sys_updated_on>
+        <sys_updated_on>2019-08-25 19:13:28</sys_updated_on>
         <sys_version>2</sys_version>
         <template/>
         <type>email</type>

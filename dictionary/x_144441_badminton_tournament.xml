@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element audit="true" label="Tournament" max_length="40" name="x_144441_badminton_tournament" type="collection">
+        <element label="Account Info" max_length="8000" name="account_info" type="html"/>
         <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
         <element label="Address" max_length="1024" name="address" type="string"/>
         <element label="Description" max_length="8000" name="description" type="html"/>
@@ -8,6 +9,7 @@
         <element display="true" label="Name" max_length="254" name="name" type="string"/>
         <element attributes="ignore_filter_on_new=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <element label="Registration Date" max_length="40" name="registration_date" type="glide_date"/>
+        <element label="Registration Info" max_length="8000" name="registration_info" type="html"/>
         <element label="Short Description" max_length="254" name="short_description" type="string"/>
         <element label="Start Time" max_length="40" name="start_time" type="glide_date_time"/>
     </element>

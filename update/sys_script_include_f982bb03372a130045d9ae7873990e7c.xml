@@ -15,7 +15,62 @@ ServerSideTools.prototype = {
 		var iSysId = sURL.indexOf('sys_id=');
 		var sResult = (iSysId != -1) ? sURL.substring(iSysId+7, iSysId+39) : '';
 		return sResult;
-	},
+	}, // function getSysIdFromURL
+
+	getHeaderData: function(bLoggedIn, sUser, sPage) {
+		var oRet = {success: '', info: '', message: '', header: '', title: '', bLoggedIn: false, user: sUser, userName: gs.getUserDisplayName(), html: '', redirect: ''};
+		sPage = (sPage) ? sPage : 'btp_overview';
+		if ((!bLoggedIn) && (sPage != 'btp_create_account')) {
+			sPage = 'btp_login';
+		} // if not logged in
+		var grTournament = new GlideRecord('x_144441_badminton_tournament');
+		grTournament.addActiveQuery();
+		grTournament.orderByDesc('start_time');
+		grTournament.query();
+		if (grTournament.next()) {
+			oRet.header = grTournament.getValue('short_description');
+			oRet.title = grTournament.getValue('short_description');
+			if (sPage == 'btp_login') {
+				oRet.html = grTournament.getValue('description');
+				oRet.info = grTournament.address.getLabel() + '\n' + grTournament.getDisplayValue('address') + '\n';
+				oRet.info += grTournament.start_time.getLabel() + ': ' + grTournament.getDisplayValue('start_time') + '\n';
+				oRet.info += grTournament.end_time.getLabel() + ': ' + grTournament.getDisplayValue('end_time') + '\n';
+			} else if ((sPage == 'btp_create_account') || (sPage == 'btp_edit_account')) {
+				oRet.html = grTournament.getValue('account_info');
+			} else if (sPage == 'btp_overview') {
+				oRet.html = grTournament.getValue('registration_info');
+			} else {
+				oRet.html = '';
+			} // if page
+		} else {
+			oRet.title = gs.getMessage('Currently there is no active tournament!');
+			oRet.info = gs.getMessage('Currently there is no active tournament!');
+			oRet.message = gs.getMessage('Currently there is no active tournament!');
+		} // if tournament
+		if (!gs.hasRole('admin')) {
+			if (bLoggedIn) {
+				if ((sPage != 'btp_edit_account') && (sPage != 'btp_remove_account')) {
+					var grPlayer = new GlideRecord('x_144441_badminton_player');
+					grPlayer.addQuery('user', gs.getUserID());
+					grPlayer.query();
+					if (grPlayer.next()) {
+						if (grPlayer.getValue('gdpr_consent') == false) {
+							oRet.info = gs.getMessage('Please accept the GDPR before using our site!');
+							oRet.redirect = '/bck?id=btp_edit_account';
+						} // if not gdpr
+					} else {
+						oRet.info = gs.getMessage('Please edit your data before using our site!');
+						oRet.redirect = '/bck?id=btp_edit_account';
+					} // if player
+				} // if not edit or remove
+				if (sPage == 'btp_login') {
+					oRet.redirect = '/bck?id=btp_overview';
+				} // if consent or page is login
+			} // if already logged
+		} // if not admin
+		gs.info('ServerSideTools.getHeaderData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage + ' redirect: ' + oRet.redirect);
+		return oRet;
+	}, // function getHeaderData
 
 	_setParticipant: function(sParticipant, sPlayer, sTournament, bActive) {
 		var sState = (bActive === true) ? '1' : '0';
@@ -103,13 +158,13 @@ ServerSideTools.prototype = {
 
 	getPartnerQuery: function(sUser, sGender, sCat, sCatGender, sCatType, sTournament, iMaxChildAge) {
 		var aQuery = [];
-		var sPartCatMapGenderQuery = '';
+		//var sPartCatMapGenderQuery = '';
 		if ((sCatGender) && (sCatGender != 'mixed')) {
 			aQuery.push('user.gender=' + sCatGender);
-			sPartCatMapGenderQuery = 'player.user.gender!=' + sCatGender;
+			//sPartCatMapGenderQuery = 'partner.player.user.gender==' + sCatGender;
 		} else if (sCatGender == 'mixed') {
 			aQuery.push('user.gender!=' + sGender);
-			sPartCatMapGenderQuery = 'player.user.gender=' + sCatGender;
+			//sPartCatMapGenderQuery = 'partner.player.user.gender!=' + sCatGender;
 		} else {
 			aQuery.push('year>' + String(Number(new Date().getFullYear()) - iMaxChildAge));
 		} // if gender same or mixed or child
@@ -118,12 +173,13 @@ ServerSideTools.prototype = {
 		var grParticipantCategoryMap = new GlideRecord('x_144441_badminton_m2m_categories_badminton_m2');
 		grParticipantCategoryMap.addQuery('badminton_m2m_players_tournaments.tournament', sTournament);
 		grParticipantCategoryMap.addQuery('category.type', sCatType);
-		if (sPartCatMapGenderQuery) {
-			grParticipantCategoryMap.addEncodedQuery(sPartCatMapGenderQuery);
-		} // if partner cat map gender
+		// 		if (sPartCatMapGenderQuery) {
+		// 			grParticipantCategoryMap.addEncodedQuery(sPartCatMapGenderQuery);
+		// 		} // if partner cat map gender
 		grParticipantCategoryMap.addNotNullQuery('partner');
 		grParticipantCategoryMap.query();
 		while (grParticipantCategoryMap.next()) {
+			//gs.info('ServerSideTools.getPartnerQuery sUser: ' + sUser + ' sGender: ' + sGender + ' sCat: ' + sCat + ' sCatType: ' + sCatType + ' sCatGender: ' + sCatGender + ' sTournament: ' + sTournament + ' grParticipantCategoryMap: ' + grParticipantCategoryMap.getDisplayValue() + ' player: ' + grParticipantCategoryMap.partner.player.getDisplayValue());
 			aParticipant.push(String(grParticipantCategoryMap.partner.player));
 		} // each participant which has already a partner
 		aQuery.push('sys_idNOT IN' + aParticipant.join(','));
@@ -131,45 +187,6 @@ ServerSideTools.prototype = {
 		return aQuery.join('^');
 	},
 
-	getHeaderData: function(bLoggedIn, sUser, sPage) {
-		var oRet = {success: '', info: '', message: '', title: '', bLoggedIn: false, user: sUser, userName: gs.getUserDisplayName(), html: '', redirect: ''};
-		var grTournament = new GlideRecord('x_144441_badminton_tournament');
-		grTournament.addActiveQuery();
-		grTournament.orderByDesc('start_time');
-		grTournament.query();
-		if (grTournament.next()) {
-			oRet.title = grTournament.getValue('short_description');
-			oRet.html = grTournament.getValue('description');
-			oRet.info = grTournament.address.getLabel() + '\n' + grTournament.getDisplayValue('address') + '\n';
-			oRet.info += grTournament.start_time.getLabel() + ': ' + grTournament.getDisplayValue('start_time') + '\n';
-			oRet.info += grTournament.end_time.getLabel() + ': ' + grTournament.getDisplayValue('end_time') + '\n';
-		} else {
-			oRet.title = gs.getMessage('Currently there is no active tournament!');
-			oRet.info = gs.getMessage('Currently there is no active tournament!');
-			oRet.message = gs.getMessage('Currently there is no active tournament!');
-		} // if tournament
-		if (bLoggedIn) {
-			if ((sPage != 'btp_edit_account') && (sPage != 'btp_remove_account')) {
-				var grPlayer = new GlideRecord('x_144441_badminton_player');
-				grPlayer.addQuery('user', gs.getUserID());
-				grPlayer.query();
-				if (grPlayer.next()) {
-					if (grPlayer.getValue('gdpr_consent') == false) {
-						oRet.info = gs.getMessage('Please accept the GDPR before using our site!');
-						oRet.redirect = '/bck?id=btp_edit_account';
-					} // if not gdpr
-				} else {
-					oRet.info = gs.getMessage('Please edit your data before using our site!');
-					oRet.redirect = '/bck?id=btp_edit_account';
-				} // if player
-			} // if not edit or remove
-			if (sPage == 'btp_login') {
-				oRet.redirect = '/bck?id=btp_overview';
-			} // if consent or page is login
-		} // if already logged
-		gs.info('ServerSideTools.getHeaderData bLoggedIn: ' + bLoggedIn + ' sUser: ' + sUser + ' sPage: ' + sPage + ' redirect: ' + oRet.redirect);
-		return oRet;
-	},
 
 	validateEmail: function(sToken) {
 		var oRet = {success: '', message: '', title: gs.getMessage('Validate Email Account'), redirect: '/bck?id=btp_login'};
@@ -490,13 +507,13 @@ ServerSideTools.prototype = {
         <sys_created_by>tom</sys_created_by>
         <sys_created_on>2018-06-12 06:25:27</sys_created_on>
         <sys_id>f982bb03372a130045d9ae7873990e7c</sys_id>
-        <sys_mod_count>221</sys_mod_count>
+        <sys_mod_count>235</sys_mod_count>
         <sys_name>ServerSideTools</sys_name>
         <sys_package display_value="Badminton Tournament Planner" source="x_144441_badminton">681664313722130045d9ae7873990e88</sys_package>
         <sys_policy>read</sys_policy>
         <sys_scope display_value="Badminton Tournament Planner">681664313722130045d9ae7873990e88</sys_scope>
         <sys_update_name>sys_script_include_f982bb03372a130045d9ae7873990e7c</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2019-06-12 14:34:27</sys_updated_on>
+        <sys_updated_on>2019-08-25 14:40:20</sys_updated_on>
     </sys_script_include>
 </record_update>
